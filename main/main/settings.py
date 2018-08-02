@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
 
     # Local Apps
+    'apps.loginRegistration',
     'apps.ecommerce',
 ]
 
@@ -95,7 +96,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'todo',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '3306',
     }

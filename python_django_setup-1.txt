@@ -1,0 +1,47 @@
+virtualenv -p python3 djangoPy3Env
+source djangoPy3Env/bin/activate
+pip install Django==2.0.7
+django-admin startproject main
+pip install djangorestframework
+pip install django-debug-toolbar
+pip install mysqlclient
+mysql.server start
+mysql -h localhost -u root -p
+pip install markdown
+pip install django-filter
+cd main
+mkdir apps
+cd apps
+touch __init__.py
+python ../manage.py startapp first_app
+
+  # Inside main/settings.py
+  INSTALLED_APPS = [
+      'django.contrib.admin',
+      'django.contrib.auth',
+      'django.contrib.contenttypes',
+      'django.contrib.sessions',
+      'django.contrib.messages',
+      'django.contrib.staticfiles',
+  ]
+  # BECOMES:
+   INSTALLED_APPS = [
+       'apps.first_app', ### added this line!
+       'django.contrib.admin',
+       'django.contrib.auth',
+       'django.contrib.contenttypes',
+       'django.contrib.sessions',
+       'django.contrib.messages',
+       'django.contrib.staticfiles',
+   ]
+   Go to your main folder and run python manage.py runserver from the terminal. Then proceed to localhost:8000
+deactivate  // deactivate virtualenv
+
+
+ *REACT 
+npm install 
+npm install -g create-react-app
+create-react-app
+create-react-app name-of-project
+npm start
+npm run build
