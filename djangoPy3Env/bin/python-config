@@ -1,4 +1,4 @@
-#!/Users/paulinosantos/Desktop/group_project/Ecommerce_Django/djangoPy3Env/bin/python
+#!/Users/paulinosantos/Desktop/django_group_project/Ecommerce_Django/djangoPy3Env/bin/python
 
 import sys
 import getopt
