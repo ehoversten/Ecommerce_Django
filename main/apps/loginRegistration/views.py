@@ -5,6 +5,7 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
 from .models import *
 import datetime
+import MySQLdb as sql
 
 def index(request):
     try:
