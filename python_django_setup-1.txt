@@ -1,3 +1,5 @@
+----Resources and commands----
+
 virtualenv -p python3 djangoPy3Env
 source djangoPy3Env/bin/activate
 pip install Django==2.0.7
@@ -37,7 +39,7 @@ python ../manage.py startapp first_app
    Go to your main folder and run python manage.py runserver from the terminal. Then proceed to localhost:8000
 deactivate  // deactivate virtualenv
 
-
+--- for later use ---
  *REACT 
 npm install 
 npm install -g create-react-app
