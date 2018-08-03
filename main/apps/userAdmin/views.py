@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
 
 # Create your views here.
-def mainPage(request):
-    return redirect('product/')
+def index(request):
+    return render(request, 'userAdmin/index.html')

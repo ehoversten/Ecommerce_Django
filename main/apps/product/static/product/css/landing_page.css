@@ -1,0 +1,20 @@
+* {
+    margin: auto;
+    font-family: 'Roboto', sans-serif;
+    /* outline: 1px solid pink; */
+}
+
+.container {
+    width: 80%;
+    margin-top: 2%;
+}
+.box{
+    float: left;
+}
+.box2{
+    float: right;
+    margin-top: 10px;
+}
+#login{
+    margin-left: 30px;
+}

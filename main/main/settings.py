@@ -41,10 +41,17 @@ INSTALLED_APPS = [
 
     # Third Party apps
 
-
+    # Missing customer from list, updated to reflect changes. - Jose 8/13
     # Local Apps
     'apps.loginRegistration',
     'apps.ecommerce',
+    'apps.userAdmin',
+    'apps.product',
+    'apps.customer',
+
+    # Not created yet.
+    # 'apps.order',
+    # 'apps.review',
 ]
 
 MIDDLEWARE = [
@@ -94,9 +101,9 @@ WSGI_APPLICATION = 'main.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'todo',
+        'NAME': 'ecommerce',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD':'password',
         'HOST': 'localhost',
         'PORT': '3306',
     }
