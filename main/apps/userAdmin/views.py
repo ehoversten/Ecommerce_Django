@@ -2,4 +2,4 @@ from django.shortcuts import render, HttpResponse, redirect
 
 # Create your views here.
 def index(request):
-    return render(request, 'ecommerce/index.html')
+    return render(request, 'userAdmin/index.html')
