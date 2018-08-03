@@ -16,6 +16,7 @@ mkdir apps
 cd apps
 touch __init__.py
 python ../manage.py startapp first_app
+pip install -r requirements.txt
 
   # Inside main/settings.py
   INSTALLED_APPS = [
