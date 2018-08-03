@@ -43,7 +43,8 @@ INSTALLED_APPS = [
 
 
     # Local Apps
-    'apps.ecommerce',
+    'apps.userAdmin',
+    'apps.product',
 ]
 
 MIDDLEWARE = [
