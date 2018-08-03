@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     # Local Apps
     'apps.loginRegistration',
     'apps.ecommerce',
+    'apps.userAdmin',
+    'apps.product',
 ]
 
 MIDDLEWARE = [
@@ -94,7 +96,7 @@ WSGI_APPLICATION = 'main.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'todo',
+        'NAME': 'ecommerce',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',
