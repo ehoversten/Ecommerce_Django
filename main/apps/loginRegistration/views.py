@@ -7,6 +7,7 @@ from .models import *
 import datetime
 import MySQLdb as sql
 
+
 def index(request):
     try:
         request.session['user_id']
@@ -16,16 +17,18 @@ def index(request):
         return redirect('/success')
     return render(request, "loginRegistration/index.html")
 
+
 def create(request):
-    if request.method =='POST':
+    if request.method == 'POST':
         result = User.objects.validation(request.POST)
     if type(result) == list:
         for error in result:
             messages.error(request, error)
-        return redirect('/')        
+        return redirect('/')
     request.session['user_id'] = result.id
     messages.success(request, "Successfully Registered")
     return redirect('/success')
+
 
 def login(request):
     result = User.objects.validation_2(request.POST)
@@ -33,10 +36,11 @@ def login(request):
         for error in result:
             messages.error(request, error)
         return redirect('/')
-    
+
     request.session['user_id'] = result.id
     messages.success(request, "Thanks for logging in!")
     return redirect('/success')
+
 
 def success(request):
     try:
@@ -47,6 +51,7 @@ def success(request):
         "user": User.objects.get(id=request.session['user_id'])
     }
     return render(request, "loginRegistration/success.html", context)
+
 
 def logout(request):
     request.session.clear()
