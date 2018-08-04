@@ -92,6 +92,8 @@ celerybeat-schedule
 *.sage.py
 
 # Environments
+djangoPy3Env
+.djangoPy3Env/
 .env
 .venv
 env/
