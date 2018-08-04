@@ -6,10 +6,11 @@ pApp = "product"
 def landing(request):
     return render(request, pApp + '/landingPage.html')
 
-
 def newProduct(request):
-    return render(request, pApp + '/newProduct.html')
+    return render(request, pApp + '/new_product.html')
 
+def productReview(request):
+    return render(request, pApp + '/product_review.html')
 
 def editProduct(request):
     return render(request, pApp + '/editProduct.html')

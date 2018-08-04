@@ -8,6 +8,7 @@ urlpatterns = [
     # Get routes
     url(r'^$', views.landing), # root page or "landing" page
     url(r'^new$', views.newProduct), # root page or "landing" page
+    url(r'^review$', views.productReview), # product review
     url(r'^/(?P<product_id>\d+)/detail$', views.producDetail), 
     url(r'^/(?P<product_id>\d+)/edit$', views.editProduct), 
 
