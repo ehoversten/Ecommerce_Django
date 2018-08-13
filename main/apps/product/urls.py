@@ -16,4 +16,6 @@ urlpatterns = [
     # Post or Put Routes
 #    url(r'^/(?P<x>\d+)$/update', views.updateProduct),
 #    url(r'^/(?P<x>\d+)$/delete', views.deleteProduct),
-]
+] 
+# + static(settings.MEDIA_URL, document_root=/main/settings.MEDIA_ROOT) # will need to figure it out later. 
+

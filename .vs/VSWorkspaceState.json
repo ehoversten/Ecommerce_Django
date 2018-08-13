@@ -3,9 +3,10 @@
     "",
     "\\main",
     "\\main\\apps",
-    "\\main\\apps\\ecommerce",
+    "\\main\\apps\\product",
+    "\\main\\apps\\product\\models",
     "\\main\\main"
   ],
-  "SelectedNode": "\\main\\main\\urls.py",
+  "SelectedNode": "\\main\\apps\\product\\models\\detailsModels.py",
   "PreviewInSolutionExplorer": false
 }

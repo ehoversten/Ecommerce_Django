@@ -5,16 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login and Registration Form</title>
     {% load static%}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <title>Login and Registration Form</title>
 </head>
 
 <body>
     <style>
         body {
             background-image: url("paper.gif");
-            background-color: #a672ae;
+            background-color: #d8d8d8;
         }
     </style>
     {% if messages %}
@@ -27,26 +27,32 @@
     <div class="col-md-3"></div>
     <div class="container col-md-5">
         <h1>Registration</h1>
-        <form action="/create" method="post">
+        <form action="create" method="post">
             {% csrf_token %}
             <label for="ex3">First name:</label>
-            <input type="text" id="fName" class="form-control" id="focusedInput" name="fName" placeholder="First Name"> <br>
+            <input type="text" id="fName" class="form-control" id="focusedInput" name="fName" placeholder="First Name">
+            <br>
             <label for="ex3">Last Name:</label>
-            <input type="text" id="lName" class="form-control" name="lName" placeholder="Last Name"> <br>
+            <input type="text" id="lName" class="form-control" name="lName" placeholder="Last Name">
+            <br>
             <label for="ex3">Email:</label>
-            <input type="email" id="email" class="form-control" name="email" placeholder="Email"> <br>
+            <input type="email" id="email" class="form-control" name="email" placeholder="Email">
+            <br>
             <label class="checkbox-inline">
-            <label for="ex3">Select Gender:</label>
-            <input type="radio" name="gender" value="Female"> Female</label>
+                <label for="ex3">Select Gender:</label>
+                <input type="radio" name="gender" value="Female"> Female</label>
             <label class="checkbox-inline">
-            <input type="radio" name="gender" value="Male"> Male </label>
+                <input type="radio" name="gender" value="Male"> Male </label>
             <label class="checkbox-inline">
-            <input type="radio" name="gender" value="Other"> Other </label> <br>
+                <input type="radio" name="gender" value="Other"> Other </label>
+            <br>
 
             <label for="ex3">Birthday:</label>
-            <input type="date" id="datefield" class="form-control" name="date" placeholder="Birthday"> <br>
+            <input type="date" id="datefield" class="form-control" name="date" placeholder="Birthday">
+            <br>
             <label for="ex3">Password:</label>
-            <input type="password" id="password1" class="form-control" name="password1" placeholder="Password"> <br>
+            <input type="password" id="password1" class="form-control" name="password1" placeholder="Password">
+            <br>
             <label for="ex3">Confirm Password:</label>
             <input type="password" id="password2" class="form-control" name="password2" placeholder="Confirm Password">
             <br>
@@ -54,10 +60,11 @@
         </form>
 
         <h1>User Login</h1>
-        <form action="/login" method="post">
+        <form action="login" method="post">
             {% csrf_token %}
             <label for="ex3">Email</label>
-            <input type="email" id="email" class="form-control" name="email" placeholder="Enter Email"> <br>
+            <input type="email" id="email" class="form-control" name="email" placeholder="Enter Email">
+            <br>
             <label for="ex3">Password:</label>
             <input type="password" id="password" class="form-control" name="password" placeholder="Enter Password">
             <br>

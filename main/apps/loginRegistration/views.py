@@ -14,7 +14,7 @@ def index(request):
     except:
         request.session['user_id'] = []
     if request.session['user_id']:
-        return redirect('/success')
+        return redirect('/user/success')
     return render(request, "loginRegistration/index.html")
 
 
@@ -27,7 +27,7 @@ def create(request):
         return redirect('/')
     request.session['user_id'] = result.id
     messages.success(request, "Successfully Registered")
-    return redirect('/success')
+    return redirect('/user/success')
 
 
 def login(request):
@@ -39,7 +39,7 @@ def login(request):
 
     request.session['user_id'] = result.id
     messages.success(request, "Thanks for logging in!")
-    return redirect('/success')
+    return redirect('/user/success')
 
 
 def success(request):
