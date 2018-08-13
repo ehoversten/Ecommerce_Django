@@ -6,6 +6,11 @@ __pycache__/
 # C extensions
 *.so
 
+# PYC or Pycharm Files
+*.pyc 
+.pyc
+/.pyc
+
 # Miscellaneous
 .DS_Store
 DS_Store
