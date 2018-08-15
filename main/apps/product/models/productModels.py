@@ -3,40 +3,37 @@ from datetime import datetime
 
 from django.db import models
 
-from detailsModels import Color, Size, Category
+from .detailsModels import Category, Color, Size
+from .detailsModels import ColorManager ## This is how we can use the colormanager
+
 
 from ...loginRegistration.models import User
 
-# from ..accounts.model import *
-# from ..review.models import Review
-# from submodels.productDetailsModels.py import *
-
-
 """ I've abstracted the details for the product to 'detailsModels' this will keep it a little neater hopefully -Jose 8/4 """
+
 class ProductManager(models.Manager):
 
     def ProductManager(self, form, user_id):
         errors = []
 
         if not form['name']:
-            errors.append('Product name is required')
+            errors.append('Product name is required.')
         if len(form['name']) < 3:
-            errors.append('Product name needs to be more than 3 characters')
+            errors.append('Product name needs to be more than 3 characters.')
         if not form['brand']:
-            errors.append('Brand name is required')
+            errors.append('Brand name is required.')
         if len(form['brand']) < 2:
-            errors.append('Brand name needs to be more than 2 characters')
+            errors.append('Brand name needs to be more than 2 characters.')
         if not form['description']:
-            errors.append('Product description can\'t be empty')
+            errors.append('Product description can\'t be empty.')
         if len(form['description']) < 3:
-            errors.append('Product description needs to be more than 3 characters')
+            errors.append('Product description needs to be more than 3 characters.')
         if not form['price']:
-            errors.append('Please provide a price for the product')
+            errors.append('Please provide a price for the product.')
 
         if not errors:
             seller = User.objects.get(id=user_id)
             product = Product.objects.create(product=form['product'], seller=seller)
-
             return (True, product)
         else:
             return (False, errors)
@@ -60,7 +57,7 @@ class Product(models.Model):
     seller         = models.ForeignKey(User, related_name="user_id",null=True, blank=True)
     """ blank=True determines whether the field will be required in forms. This includes the admin and your own custom forms. If blank=True then the field will not be required, whereas if it's False the field cannot be blank """
     # order          = models.OneToManyField(Review, related_name="product_id",null=True, blank=True)
-    # category          = models.OneToManyField(Review, related_name="product_id",null=True, blank=True)
+    
     # review          = models.OneToManyField(Review, related_name="product_id",null=True, blank=True)
     # size          = models.OneToManyField(Review, related_name="product_id",null=True, blank=True)
     # color          = models.OneToManyField(Review, related_name="product_id",null=True, blank=True)
