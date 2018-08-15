@@ -1,10 +1,50 @@
 import re
 from datetime import datetime
 
-from productModels import Product
 from django.db import models
+from .productModels import Product
 
-""" Missing the validator, will have to figure out logic on how to implement them when creating a product to pass the color, size, and category with it. -Jose 8/4 """
+"""I tried implementing the ColorManager on the productModels but it doesnt seem to like that.
+Will have to implement it a different way, maybe create the product and send it to the details models after that. We could also create and 'instance' of the class in the Product Models -Jose 8/15 """
+
+
+class ColorManager(models.Manager):
+    def ColorManager(self, form, product_id ):
+        errors = []
+
+        if not form['name']:
+            errors.append('Color name is required for the product.')
+        if len(form['name']) < 3:
+            errors.append('Product name needs to be more than 3 characters.')
+
+class SizeManager(models.Manager):
+    def SizeManager(self, form, product_id ):
+        errors = []
+
+        if not form['size']:
+            errors.append('Size name is required for the product.')
+        if len(form['size']) < 2:
+            errors.append('size name needs to be more than 1 character.')
+
+class CategoryManager(models.Manager):
+    def CategoryManager(self, form, product_id ):
+        errors = []
+
+        if not form['category']:
+            errors.append('Category name is required for the product.')
+        if len(form['category']) < 2:
+            errors.append('Category name needs to be more than 2 characters.')
+    
+# class BrandManager(models.Manager):
+#     def BrandManager(self, form, product_id ):
+#         errors = []
+
+#         if not form['category']:
+#             errors.append('Category name is required for the product.')
+#         if len(form['category']) < 2:
+#             errors.append('Category name needs to be more than 2 characters.')
+    
+
 
 class Color(models.Model):
     name            = models.CharField(max_length=120)
@@ -16,6 +56,7 @@ class Color(models.Model):
     created_at      = models.DateTimeField(auto_now_add=True)
     updated_at      = models.DateTimeField(auto_now_add=True)
     timestamp       = models.DateTimeField(auto_now_add=True)
+    objects = ColorManager()
 
     # objects = colorValidator() ## Not sure if we are gonna need this.
     def __str__(self):
@@ -32,6 +73,7 @@ class Size(models.Model):
     created_at      = models.DateTimeField(auto_now_add=True)
     updated_at      = models.DateTimeField(auto_now_add=True)
     timestamp       = models.DateTimeField(auto_now_add=True)
+    objects = SizeManager()
 
     # objects = SizeValidator() ## Not sure if we are gonna need this.
     def __str__(self):
@@ -42,11 +84,24 @@ class Category(models.Model):
     name            = models.CharField(max_length=120)
 
     # Foreign key
-    product         = models.ForeignKey(Product, related_name="product_id",null=True, blank=True)
+    pCategory         = models.ForeignKey(Product, related_name="product_id",null=True, blank=True)
 
     created_at      = models.DateTimeField(auto_now_add=True)
     updated_at      = models.DateTimeField(auto_now_add=True)
     timestamp       = models.DateTimeField(auto_now_add=True)
+    objects = CategoryManager()
+
+# class Brand(models.Model):
+#     name            = models.CharField(max_length=120)
+
+#     # Foreign key
+#     pBrand         = models.ForeignKey(Product, related_name="product_id",null=True, blank=True)
+
+#     created_at      = models.DateTimeField(auto_now_add=True)
+#     updated_at      = models.DateTimeField(auto_now_add=True)
+#     timestamp       = models.DateTimeField(auto_now_add=True)
+#     objects = BrandManager()
+
 
     # objects = CategoryValidator() ## Not sure if we are gonna need this.
     def __str__(self):
