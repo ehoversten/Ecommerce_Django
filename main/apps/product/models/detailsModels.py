@@ -11,7 +11,7 @@ class Color(models.Model):
 
     """ Since it is 'Product' can have many colors, we only need the ForeignKey """
     # Foreign key
-    product         = models.ForeignKey(Product, related_name="product_id",null=True, blank=True)
+    pColor         = models.ForeignKey(Product, related_name="product_id",null=True, blank=True)
 
     created_at      = models.DateTimeField(auto_now_add=True)
     updated_at      = models.DateTimeField(auto_now_add=True)
@@ -27,7 +27,7 @@ class Size(models.Model):
     name            = models.CharField(max_length=120)
 
     # Foreign key
-    product         = models.ForeignKey(Product, related_name="product_id",null=True, blank=True)
+    pSize         = models.ForeignKey(Product, related_name="product_id",null=True, blank=True)
 
     created_at      = models.DateTimeField(auto_now_add=True)
     updated_at      = models.DateTimeField(auto_now_add=True)

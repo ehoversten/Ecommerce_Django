@@ -36,6 +36,8 @@ class ProductManager(models.Manager):
         if not errors:
             seller = User.objects.get(id=user_id)
             product = Product.objects.create(product=form['product'], seller=seller)
+            pColor.add(product)
+
 
             return (True, product)
         else:
@@ -60,7 +62,7 @@ class Product(models.Model):
     seller         = models.ForeignKey(User, related_name="user_id",null=True, blank=True)
     """ blank=True determines whether the field will be required in forms. This includes the admin and your own custom forms. If blank=True then the field will not be required, whereas if it's False the field cannot be blank """
     # order          = models.OneToManyField(Review, related_name="product_id",null=True, blank=True)
-    # category          = models.OneToManyField(Review, related_name="product_id",null=True, blank=True)
+    
     # review          = models.OneToManyField(Review, related_name="product_id",null=True, blank=True)
     # size          = models.OneToManyField(Review, related_name="product_id",null=True, blank=True)
     # color          = models.OneToManyField(Review, related_name="product_id",null=True, blank=True)
