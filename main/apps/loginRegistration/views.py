@@ -35,7 +35,7 @@ def login(request):
     if type(result) == list:
         for error in result:
             messages.error(request, error)
-        return redirect('/')
+        return redirect('/user')
 
     request.session['user_id'] = result.id
     messages.success(request, "Thanks for logging in!")
