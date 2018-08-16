@@ -51,9 +51,9 @@ INSTALLED_APPS = [
     'apps.userAdmin',
     'apps.product',
     'apps.customer',
+    'apps.order',
 
     # Not created yet.
-    # 'apps.order',
     # 'apps.review',
 ]
 
@@ -107,7 +107,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ecommerce',
         'USER': 'root',
-        'PASSWORD':'root',
+        'PASSWORD':'',
         'HOST': 'localhost',
         'PORT': '3306',
     }
