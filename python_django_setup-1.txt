@@ -11,6 +11,7 @@ mysql.server start
 mysql -h localhost -u root -p
 pip install markdown
 pip install django-filter
+python manage.py createsuperuser    //create new admin
 cd main
 mkdir apps
 cd apps

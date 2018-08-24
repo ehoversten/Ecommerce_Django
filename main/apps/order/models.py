@@ -8,7 +8,7 @@ from django.db.models.signals import pre_save, post_save
 from django.core.urlresolvers import reverse
 from django.utils import timezone
 # from ..product.models.productModels import Product
-from ..product.models.detailsModels import Color, Size, Category
+# from ..product.models.detailsModels import Color, Size, Category
 from ..loginRegistration.models import User
 
 # for future feature 
@@ -73,7 +73,7 @@ class OrderDetail(models.Model):
     updated_at        = models.DateTimeField(auto_now=True)
     created_at        = models.DateTimeField(auto_now_add=True)
     # item              = models.ForeignKey(Product, related_name ='orderitem')
-    def __str__(self):
-        return self.item.name
+    # def __str__(self):
+    #     return self.item.name
 
    

@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
-from ..product.models.detailsModels import Color, Size, Category
+# from ..product.models.detailsModels import Color, Size, Category
 from ..product.models.productModels import Product
 
 pApp = "product"  # short for Product App
