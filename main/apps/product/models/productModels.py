@@ -3,8 +3,8 @@ from datetime import datetime
 
 from django.db import models
 
-from .detailsModels import Category, Color, Size
-from .detailsModels import ColorManager ## This is how we can use the colormanager
+from ...product.models.detailsModels import Color, Size, Category
+from ...product.models.detailsModels import ColorManager ## This is how we can use the colormanager
 
 
 from ...loginRegistration.models import User
