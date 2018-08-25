@@ -52,10 +52,6 @@ class RegisterForm(forms.Form):
 			raise forms.ValidationError("username already exists")
 		return username
 
-
-
-
-
 	def clean(self):
 		data = self.cleaned_data
 		password = self.cleaned_data.get('password')
@@ -63,3 +59,4 @@ class RegisterForm(forms.Form):
 		if password2 != password:
 			raise forms.ValidationError("password must match")
 		return data
+		

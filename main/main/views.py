@@ -32,7 +32,7 @@ def contact_page(request):
 	# if request.method == "POST" :
 	# 	print(request.POST)
 	# 	print(request.POST.get)
-	return render(request, "view.html",context)
+	return render(request, "contact.html",context)
 
 
-# reporter = Reporters.objects.get(name='Tintin')
+# reporter = Reporters.objects.get(name='clark_kent')
