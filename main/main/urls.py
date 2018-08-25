@@ -16,10 +16,12 @@ urlpatterns = [
     url(r'^', include('apps.ecommerce.urls')),  # when we hit he root route it will take us there.
     # url(r'^order/', include('apps.order.urls')),
 
-    # new login and register logout url
+    # new login and register logout url nav bar
     url(r'^register/$', register_page,name='register'),
     url(r'^login/$', login_page, name='login'),
     url(r'^logout/$', LogoutView.as_view(), name='logout'),
+    # contact navbar
+    url(r'^contact/$', contact_page, name='contact'),
 
     # Not implemented yet, but routes are set - Jose 8/13
     # url(r'^review/', include('apps.review.urls')),
