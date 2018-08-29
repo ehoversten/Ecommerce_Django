@@ -2,7 +2,7 @@ import re
 from datetime import datetime
 
 from django.db import models
-from ...product.models.productModels import Product
+# from ...product.models.productModels import Product
 
 """I tried implementing the ColorManager on the productModels but it doesnt seem to like that.
 Will have to implement it a different way, maybe create the product and send it to the details models after that. We could also create and 'instance' of the class in the Product Models -Jose 8/15 """
@@ -68,7 +68,7 @@ class Size(models.Model):
     name            = models.CharField(max_length=120)
 
     # Foreign key
-    pSize         = models.ForeignKey(Product, related_name="product_id",null=True, blank=True)
+    # pSize         = models.ForeignKey(Product, related_name="product_id",null=True, blank=True)
 
     created_at      = models.DateTimeField(auto_now_add=True)
     updated_at      = models.DateTimeField(auto_now_add=True)
@@ -84,7 +84,7 @@ class Category(models.Model):
     name            = models.CharField(max_length=120)
 
     # Foreign key
-    pCategory         = models.ForeignKey(Product, related_name="product_id",null=True, blank=True)
+    # pCategory         = models.ForeignKey(Product, related_name="product_id",null=True, blank=True)
 
     created_at      = models.DateTimeField(auto_now_add=True)
     updated_at      = models.DateTimeField(auto_now_add=True)
