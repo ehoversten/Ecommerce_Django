@@ -1,28 +1,27 @@
 {% extends "base.html" %}
 {% load static %}
-{% url 'products:list' as product_list_url %}
+{% url "products:list" as product_list_url %}
 
 <title>Home Page Template</title>
 
 {% block content %}
 
 
-<div class='text-center'>
+<div class="text-center">
    <!--  <h1>{{ title }}</h1> -->    
 </div>
-<div class='container'>
-  <div class='row'>
-    <div class='col'>
-        <img src="{% static 'img/giphy2.gif' %}" class='img-fluid' />
+<div class="container">
+  <div class="row">
+    <div class="col">
+        <img src="{% static 'img/giphy2.gif' %}" class="img-fluid" />
         <p>{{ content }}</p>
        
         <a class="nav-link" href="products"><img src="{% static 'img/shopping.jpg'%}" style="display: block;margin-left: auto; margin-right:auto; "></a>
-      </li>
     </div>
   </div>
   {% if request.user.is_authenticated %}
-  <div class='row'>
-    <div class='col'>
+  <div class="row">
+    <div class="col">
    
     </div>
   </div>

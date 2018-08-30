@@ -84,7 +84,7 @@ class Category(models.Model):
     name            = models.CharField(max_length=120)
 
     # Foreign key
-    pCategory         = models.ForeignKey(Product, related_name="product_id",null=True, blank=True)
+    # pCategory         = models.ForeignKey(Product, related_name="product_id",null=True, blank=True)
 
     created_at      = models.DateTimeField(auto_now_add=True)
     updated_at      = models.DateTimeField(auto_now_add=True)
