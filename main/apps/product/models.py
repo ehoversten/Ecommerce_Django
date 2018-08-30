@@ -5,6 +5,17 @@ from django.db import models
 # from ..loginRegistration.models import User
 from django.contrib.auth.models import User
 
+
+class Category(models.Model):
+    name            = models.CharField(max_length=120)
+    # pCategory = models.ManyToManyField(Product,related_name="cTproduct_id")
+
+    created_at      = models.DateTimeField(auto_now_add=True)
+    updated_at      = models.DateTimeField(auto_now_add=True)
+    timestamp       = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.name 
+
 class Product(models.Model):
     name            = models.CharField(max_length=120)
     brand           = models.CharField(max_length=120)
@@ -19,6 +30,7 @@ class Product(models.Model):
 
     ## Foreign keys. 
     seller         = models.ForeignKey(User, related_name="user_id",null=True, blank=True)
+    pCategory      = models.ManyToManyField(Category,related_name="cCategory_id")
 
     created_at      = models.DateTimeField(auto_now_add=True)
     updated_at      = models.DateTimeField(auto_now_add=True)
@@ -55,12 +67,12 @@ class Size(models.Model):
         return self.name
 
 
-class Category(models.Model):
-    name            = models.CharField(max_length=120)
-    pCategory = models.ManyToManyField(Product,related_name="cTproduct_id")
+# class Category(models.Model):
+#     name            = models.CharField(max_length=120)
+#     # pCategory = models.ManyToManyField(Product,related_name="cTproduct_id")
 
-    created_at      = models.DateTimeField(auto_now_add=True)
-    updated_at      = models.DateTimeField(auto_now_add=True)
-    timestamp       = models.DateTimeField(auto_now_add=True)
-    def __str__(self):
-        return self.name 
+#     created_at      = models.DateTimeField(auto_now_add=True)
+#     updated_at      = models.DateTimeField(auto_now_add=True)
+#     timestamp       = models.DateTimeField(auto_now_add=True)
+#     def __str__(self):
+#         return self.name 
