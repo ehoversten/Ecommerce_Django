@@ -4,13 +4,13 @@
 
 <div class="container">
   <h3>Welcome Back, Please Login</h3>
-  <div class="form-group" style="width:50%">
-    <form method='POST'> {% csrf_token %}
-        {{ form.as_p }}
-        <button type='submit' class='btn btn-primary'>Login</button>
-     </form>
-  </div>
-
+  <form method='POST' style="width:50%">
+    {% csrf_token %}
+    <div class="form-group" >
+      {{ form.as_p }}
+      <button type='submit' class='btn btn-primary'>Login</button>
+    </div>
+  </form>
 </div>
 
- {% endblock content %}
+{% endblock content %}

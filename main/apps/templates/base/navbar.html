@@ -1,6 +1,6 @@
 {% url 'home' as home_url %}
 {% url 'contact' as contact_url %}
-{% url 'products:list' as product_list_url %}
+{% url 'product' as product_url %}
 {% url 'login' as login_url %}
 {% url 'logout' as logout_url %}
 {% url 'register' as register_url %}
@@ -10,7 +10,7 @@
    <div class='container'>
   <a class="navbar-brand" href="{{ home_url }}">
     <img src="http://getbootstrap.com/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-    {% if brand_name %} {{brand_name }} {% else %}CFE eCommerce {% endif %}
+    {% if brand_name %} {{brand_name }} {% else %} Dojo Ecomerce {% endif %}
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -24,10 +24,9 @@
       <li class="nav-item {% if request.path == contact_url %}active{% endif %}">
         <a class="nav-link" href="{{ contact_url }}">Contact</a>
       </li>
-      <li class="nav-item {% if request.path == product_list_url %}active{% endif %}">
-        <a class="nav-link" href="{{ product_list_url }}">Products</a>
+      <li class="nav-item {% if request.path == product_url %}active{% endif %}">
+        <a class="nav-link" href="product">Products</a>
       </li>
-
 
        <li class="nav-item {% if request.path == logout_url %}active{% endif %}">
         <a class="nav-link" href="{{ logout_url }}">Logout</a>
