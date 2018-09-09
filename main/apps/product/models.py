@@ -33,6 +33,14 @@ class Size(models.Model):
     def __str__(self):
         return self.name
 
+# class Image(models.Model):
+#     thumb = models.ImageField(default='default.svg.png', blank=True)
+#     created_at      = models.DateTimeField(auto_now_add=True)
+#     updated_at      = models.DateTimeField(auto_now_add=True)
+#     timestamp       = models.DateTimeField(auto_now_add=True)
+#     def __str__(self):
+#         return self.name
+
 
 # Product 
 
@@ -45,9 +53,10 @@ class Product(models.Model):
     active          = models.BooleanField(default=True)
     inStock         = models.BooleanField(default=True)
     quantity        = models.IntegerField(default=1)
-    quantitySold    = models.IntegerField(default=0)
-    # image           = models.ImageField(upload_to=upload_image_path, null=True, blank=True) # Not sure how to do implement this one.
-
+    quantitySold = models.IntegerField(default=0)
+    thumb = models.ImageField(default='default.svg.png', blank=True)
+    # Not sure how to do implement this one.
+    # image            = models.ManyToManyField(Image, related_name="image_id")
     ## Foreign keys.
     seller          = models.ForeignKey(User, related_name="user_id",null=True, blank=True)
     
