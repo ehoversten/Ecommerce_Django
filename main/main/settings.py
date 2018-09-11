@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # MEDIA_ROOT   = os.path.join(BASE_DIR, 'media')
 # MEDIA_URL = 'media'
@@ -107,11 +107,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ecommerce',
         'USER': 'root',
-<<<<<<< HEAD
         'PASSWORD':'root',
-=======
-        'PASSWORD':'password',
->>>>>>> master
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -155,7 +151,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-#static files img css
-STATICFILES_DIRS = [
-    os.path.join('apps', "static"),
-]
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'css'),
+)
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
