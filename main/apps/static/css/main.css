@@ -57,7 +57,7 @@ span {
 /* // FOOTER CSS // */
 
 .full {
-    width: 100%;	
+    width: 100%;
 }
 
 .gap {
@@ -211,4 +211,8 @@ span {
 
 #submitBtn {
     text-align: right;
+}
+
+.icons i {
+  height: 50px;
 }
