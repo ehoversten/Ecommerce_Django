@@ -1,33 +1,17 @@
 from django import forms
-from ..product.models import productModels, detailsModels
+from .models import Product
+from .models import Color
+from .models import Category
 
-class productForm(forms.ModelForm):
+
+class createProduct(forms.ModelForm):
     class Meta:
-        model = productModels.Product
-        fields = [
-            'name',
-            'brand',
-            'description',
-            'price',
-        ]
+        model = Product
+        exclude = ('created_at', 'updated_at', 'timestamp')
 
-    class colorForm(forms.ModelForm):
-        class Meta:
-            model = detailsModels.Color
-            fields = [
-                'name',
-            ]
-            
-    class sizeForm(forms.ModelForm):
-        class Meta:
-            model = detailsModels.Color
-            fields = [
-                'name',
-            ]
-    class categoryForm(forms.ModelForm):
-        class Meta:
-            model = detailsModels.Color
-            fields = [
-                'name',
-            ]
 
+class createColor(forms.ModelForm):
+    class Meta:
+        model = Color
+        exclude = ('created_at', 'updated_at', 'timestamp')
+        

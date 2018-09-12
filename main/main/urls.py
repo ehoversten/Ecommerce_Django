@@ -23,7 +23,7 @@ urlpatterns = [
     url(r'^login/$', login_page, name='login'),
     url(r'^logout/$', LogoutView.as_view(), name='logout'),
     # contact navbar
-    url(r'^contact/$', contact_page, name='contact'),
+    url(r'^contact$', contact_page, name='contact'),
 
     # Not implemented yet, but routes are set - Jose 8/13
     # url(r'^review/', include('apps.review.urls')),

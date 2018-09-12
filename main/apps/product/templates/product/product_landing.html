@@ -1,0 +1,81 @@
+{% extends 'base_product_layout.html' %}
+{% block content%}
+<div class="container">
+    <form action="#">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <div id="imaginary_container">
+                    <div class="input-group stylish-input-group">
+                        <input type="text" class="form-control" id="searchBar" placeholder="Search">
+                        <span class="input-group-addon">
+                            <button type="submit">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <br>
+    <br>
+    <table>
+
+        <tr>
+            <td>
+                <a href="#!">
+                    <img src="http://www.clker.com/cliparts/y/C/q/F/V/b/camerapictogram-md.png" alt="social_media" id="productimg">
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="#">
+                    <h5>BALENCIAGA</h5>
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="#">
+                    <h6>KIDS SPEED TRAINERS</h6>
+                </a>
+            </td>
+        </tr>
+        <tr class="price">
+            <td>
+                $305
+                <span class="glyphicon glyphicon-shopping-cart" id="shoppingCart"></span>
+            </td>
+        </tr>
+
+    </table>
+    <div class="text-center">
+        <ul class="pagination">
+            <li class="disabled">
+                <a href="#">«</a>
+            </li>
+            <li class="active">
+                <a href="#">1
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">2</a>
+            </li>
+            <li>
+                <a href="#">3</a>
+            </li>
+            <li>
+                <a href="#">4</a>
+            </li>
+            <li>
+                <a href="#">5</a>
+            </li>
+            <li>
+                <a href="#">»</a>
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
