@@ -3,13 +3,12 @@
 <div class="container">
     <h3>Add New Product</h3>
     <br>
-    <div class="form-group row">
-        <form action="{% url 'product:new' %}" method="POST" enctype="multipart/form-data">
+    <form action="{% url 'product:new' %}" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
             {% csrf_token %}
-            {{pForm}}
             {{form}}
             <input type="submit" value="Create">
-        </form>
-    </div>
+        </div>
+    </form>
 </div>
 {% endblock %}

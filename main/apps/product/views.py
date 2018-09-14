@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib import messages
-from  .forms import createProduct, createColor
+from  .forms import createProduct
 
 Pro = "product"  # short for Product App
 
@@ -17,10 +17,10 @@ def product_new(request):
         form = createProduct(request.POST, request.FILES)
         if form.is_valid():
             print(form)
+        return redirect('product:landing')
     else:
         form = createProduct(prefix="product", label_suffix='')
-        pForm = createProduct(prefix="color", label_suffix='')
-        return render(request, Pro + '/product_new.html', {'form': form}, {'pForm': pForm})
+        return render(request, Pro + '/product_new.html', {'form': form})
 
 
 def product_review(request):  # This should be merged with the product details.
