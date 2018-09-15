@@ -7,7 +7,7 @@ from django.db import models
 
 # product details
 class Category(models.Model):
-    name            = models.CharField(max_length=120)
+    cName            = models.CharField(max_length=120)
     # pCategory = models.ManyToManyField(Product,related_name="cTproduct_id")
 
     created_at      = models.DateTimeField(auto_now_add=True)
@@ -17,7 +17,7 @@ class Category(models.Model):
         return self.name
 
 class Color(models.Model):
-    name            = models.CharField(max_length=120)
+    coName            = models.CharField(max_length=120)
     created_at      = models.DateTimeField(auto_now_add=True)
     updated_at      = models.DateTimeField(auto_now_add=True)
     timestamp       = models.DateTimeField(auto_now_add=True)
@@ -26,7 +26,7 @@ class Color(models.Model):
 
 
 class Size(models.Model):
-    name            = models.CharField(max_length=120)
+    sName            = models.CharField(max_length=120)
     created_at      = models.DateTimeField(auto_now_add=True)
     updated_at      = models.DateTimeField(auto_now_add=True)
     timestamp       = models.DateTimeField(auto_now_add=True)
