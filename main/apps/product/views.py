@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib import messages
-from .forms import CategoryModelForm, productForm, colorForm, sizeForm
+""" from .forms import CategoryModelForm, productForm """
 
 Pro = "product"  # short for Product App
 

@@ -1,6 +1,5 @@
 from django import forms
-from .models import Product, Color, Category, Size
-
+from .models import Product
 # CATAGORY = [(Category.name, Category.name.val)]
 
 
@@ -29,14 +28,7 @@ from .models import Product, Color, Category, Size
 # class createCategoryForm(forms.Form):
 #     cName = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control", "placeholder": "Category Name"}))
 
-
-class CategoryModelForm(forms.ModelForm):
-    class Meta:
-        model = Category
-        fields = ['cName']
-
-
-class productForm(forms.ModelForm):
+""" class productForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = [
@@ -46,18 +38,4 @@ class productForm(forms.ModelForm):
             'price',
         ]
 
-
-class colorForm(forms.ModelForm):
-    class Meta:
-        model = Color
-        fields = [
-            'coName',
-        ]
-
-
-class sizeForm(forms.ModelForm):
-    class Meta:
-        model = Size
-        fields = [
-            'sName',
-        ]
+ """
