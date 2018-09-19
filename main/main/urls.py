@@ -6,12 +6,14 @@ from apps.userAdmin.views import login_page,register_page, guest_register_view
 from django.contrib.auth.views import LogoutView
 from .views import home_page, about_page, contact_page
 from django.conf import settings
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     url(r'^$', home_page, name= 'home'),
     url(r'^admin/', admin.site.urls),
+#     url(r'^product/', include('apps.product.urls', namespace= 'product')),
     url(r'^user/', include('apps.loginRegistration.urls')),
-    url(r'^product/', include('apps.product.urls')),
+    # url(r'^product/', include('apps.product.urls')),
     url(r'^customer/', include('apps.customer.urls')),
     # url(r'^order/', include('apps.order.urls')),
     # url(r'^product/', include('apps.product.urls', namespace= 'product')),
@@ -23,7 +25,7 @@ urlpatterns = [
     url(r'^login/$', login_page, name='login'),
     url(r'^logout/$', LogoutView.as_view(), name='logout'),
     # contact navbar
-    url(r'^contact/$', contact_page, name='contact'),
+    url(r'^contact$', contact_page, name='contact'),
 
     # Not implemented yet, but routes are set - Jose 8/13
     # url(r'^review/', include('apps.review.urls')),
@@ -35,6 +37,5 @@ urlpatterns = [
 ]
 
 # for media use
-# if settings.DEBUG:
-#     urlpatterns=urlpatterns+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-#     urlpatterns=urlpatterns+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# urlpatterns += staticfiles_urlpatterns()  # this is for any css main files
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
