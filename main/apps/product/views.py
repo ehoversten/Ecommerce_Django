@@ -1,15 +1,21 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib import messages
-from  .forms import createProduct, createColor
-
+from .forms import createProduct, createColor
+from django.views.generic import ListView, DetailView
+from .models import Product
 Pro = "product"  # short for Product App
 
 User = get_user_model()
 
 
-def product_landing(request):
-    return render(request, Pro + '/product_landing.html')
+class product_landing(ListView):
+    template_name = "product/product_landing.html"
+    
+    def get_queryset(self, *args, **kwargs):
+        request = self.request
+        return Product.objects.all()
+
 
 
 def product_new(request):

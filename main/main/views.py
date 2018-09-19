@@ -38,4 +38,3 @@ def product_page(request):
     
 	return render(request, "product/product_view.html")
 
-# reporter = Reporters.objects.get(name='clark_kent')
