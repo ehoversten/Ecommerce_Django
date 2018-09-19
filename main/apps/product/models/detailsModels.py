@@ -8,6 +8,20 @@ from django.db import models
 Will have to implement it a different way, maybe create the product and send it to the details models after that. We could also create and 'instance' of the class in the Product Models -Jose 8/15 """
 
 
+
+
+class Product(models.Model):
+    title           = models.CharField(max_length=120)
+    description     = models.TextField()
+    slug			= models.SlugField(blank=True, unique=True)
+    price           = models.DecimalField(decimal_places=2, max_digits=20, default=39.99)
+    featured        = models.BooleanField(default=False)
+    active          = models.BooleanField(default=True)
+    timestamp       = models.DateTimeField(auto_now_add=True)
+    color           = models.CharField(max_length=120)
+    size            = models.IntegerField(max_length=120)
+    category        = models.CharField(max_length=120)
+
 class ColorManager(models.Manager):
     def ColorManager(self, form, product_id ):
         errors = []
