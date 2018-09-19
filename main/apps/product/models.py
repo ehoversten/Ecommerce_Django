@@ -5,9 +5,9 @@ from django.contrib.auth.models import User
 from django.db import models
 
 
-# product details
+""" # product details
 class Category(models.Model):
-    cName            = models.CharField(max_length=120)
+    name            = models.CharField(max_length=120)
     # pCategory = models.ManyToManyField(Product,related_name="cTproduct_id")
 
     created_at      = models.DateTimeField(auto_now_add=True)
@@ -17,7 +17,7 @@ class Category(models.Model):
         return self.name
 
 class Color(models.Model):
-    coName            = models.CharField(max_length=120)
+    name            = models.CharField(max_length=120)
     created_at      = models.DateTimeField(auto_now_add=True)
     updated_at      = models.DateTimeField(auto_now_add=True)
     timestamp       = models.DateTimeField(auto_now_add=True)
@@ -26,7 +26,7 @@ class Color(models.Model):
 
 
 class Size(models.Model):
-    sName            = models.CharField(max_length=120)
+    name            = models.CharField(max_length=120)
     created_at      = models.DateTimeField(auto_now_add=True)
     updated_at      = models.DateTimeField(auto_now_add=True)
     timestamp       = models.DateTimeField(auto_now_add=True)
@@ -43,26 +43,18 @@ class Size(models.Model):
 
 
 # Product 
-
+ """
 class Product(models.Model):
-    name            = models.CharField(max_length=120)
-    brand           = models.CharField(max_length=120) # this will put on the product details later
+    name           = models.CharField(max_length=120)
     description     = models.TextField()
-    price           = models.DecimalField(decimal_places=2, max_digits=20)
+    slug			= models.SlugField(blank=True, unique=True)
+    price           = models.DecimalField(decimal_places=2, max_digits=20, default=39.99)
     featured        = models.BooleanField(default=False)
     active          = models.BooleanField(default=True)
-    inStock         = models.BooleanField(default=True)
-    quantity        = models.IntegerField(default=1)
-    quantitySold = models.IntegerField(default=0)
     thumb = models.ImageField(default='default.svg.png', blank=True)
-    # Not sure how to do implement this one.
-    # image            = models.ManyToManyField(Image, related_name="image_id")
-    ## Foreign keys.
-    seller          = models.ForeignKey(User, related_name="user_id",null=True, blank=True)
-    
-    category        = models.ManyToManyField(Category,related_name="category_id")
-    color           = models.ManyToManyField(Color, related_name="color_id")
-    size            = models.ManyToManyField(Size, related_name="size_id")
+    color           = models.CharField(max_length=120)
+    size            = models.CharField(max_length=120)
+    category        = models.CharField(max_length=120)
 
 
     created_at      = models.DateTimeField(auto_now_add=True)
