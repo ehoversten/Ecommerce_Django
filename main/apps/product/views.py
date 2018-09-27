@@ -1,15 +1,15 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib import messages
-""" from .forms import CategoryModelForm, productForm """
-
+from .models import Product
 Pro = "product"  # short for Product App
 
 User = get_user_model()
 
 
 def product_landing(request):
-    return render(request, Pro + '/product_landing.html')
+    products = Product.objects.all()
+    return render(request, Pro + '/product_landing.html', {'products':products})
 
 
 def product_new(request):
