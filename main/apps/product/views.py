@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib import messages
 from .models import Product
@@ -13,7 +13,7 @@ def product_landing(request):
 
 
 def product_new(request):
-    # forms instances 
+    # forms instances
     form = productForm(request.POST, request.FILES)
     cForm = CategoryModelForm(request.POST)
 
