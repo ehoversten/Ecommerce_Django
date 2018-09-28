@@ -1,32 +1,33 @@
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib import messages
-from .forms import createProduct, createColor
-from django.views.generic import ListView, DetailView
 from .models import Product
 Pro = "product"  # short for Product App
 
 User = get_user_model()
 
 
-class product_landing(ListView):
-    template_name = "product/product_landing.html"
-    
-    def get_queryset(self, *args, **kwargs):
-        request = self.request
-        return Product.objects.all()
-
+def product_landing(request):
+    products = Product.objects.all()
+    return render(request, Pro + '/product_landing.html', {'products':products})
 
 
 def product_new(request):
+    # forms instances
+    form = productForm(request.POST, request.FILES)
+    cForm = CategoryModelForm(request.POST)
+
+    context = {
+        'form' :form,
+        'cForm': cForm,
+    }
+
     if request.method == 'POST':
-        form = createProduct(request.POST, request.FILES)
         if form.is_valid():
             print(form)
+        return redirect('product:landing')
     else:
-        form = createProduct(prefix="product", label_suffix='')
-        pForm = createProduct(prefix="color", label_suffix='')
-        return render(request, Pro + '/product_new.html', {'form': form}, {'pForm': pForm})
+        return render(request, Pro + '/product_new.html', context)
 
 
 def product_review(request):  # This should be merged with the product details.

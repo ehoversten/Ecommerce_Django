@@ -6,6 +6,7 @@ from django.utils.http import is_safe_url
 from .forms import LoginForm, RegisterForm, GuestForm
 from .models import GuestEmail
 
+
 def guest_register_view(request):
     form = GuestForm(request.POST or None)
     context = {
@@ -15,7 +16,7 @@ def guest_register_view(request):
     next_post = request.POST.get('next')
     redirect_path = next_ or next_post or None
     if form.is_valid():
-        email       = form.cleaned_data.get("email")
+        email = form.cleaned_data.get("email")
         new_guest_email = GuestEmail.objects.create(email=email)
         request.session['guest_email_id'] = new_guest_email.id
         if is_safe_url(redirect_path, request.get_host()):
@@ -34,8 +35,8 @@ def login_page(request):
     next_post = request.POST.get('next')
     redirect_path = next_ or next_post or None
     if form.is_valid():
-        username  = form.cleaned_data.get("username")
-        password  = form.cleaned_data.get("password")
+        username = form.cleaned_data.get("username")
+        password = form.cleaned_data.get("password")
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
@@ -50,6 +51,8 @@ def login_page(request):
 
 
 User = get_user_model()
+
+
 def register_page(request):
     form = RegisterForm(request.POST or None)
     context = {
@@ -57,10 +60,10 @@ def register_page(request):
     }
     if form.is_valid():
         print(form.cleaned_data)
-        username  = form.cleaned_data.get("username")
-        email  = form.cleaned_data.get("email")
-        password  = form.cleaned_data.get("password")
-        new_user  = User.objects.create_user(username, email, password)
+        username = form.cleaned_data.get("username")
+        email = form.cleaned_data.get("email")
+        password = form.cleaned_data.get("password")
+        new_user = User.objects.create_user(username, email, password)
         print(new_user)
 
     return render(request, "register.html", context)

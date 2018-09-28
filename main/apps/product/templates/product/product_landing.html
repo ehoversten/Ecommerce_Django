@@ -48,8 +48,42 @@
                 <span class="glyphicon glyphicon-shopping-cart" id="shoppingCart"></span>
             </td>
         </tr>
-
     </table>
+    {% for product in products %}
+
+    <table>
+
+        <tr>
+            <td>
+                <a href="#!">
+                        <img src="{{ product.thumb.url}}" alt="social_media" id="productimg">
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="#">
+                    <h5>{{product.name}}</h5>
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="#">
+                    <h6>{{product.description}}</h6>
+                </a>
+            </td>
+        </tr>
+        <tr class="price">
+            <td>
+                ${{product.price}}
+                <span class="glyphicon glyphicon-shopping-cart" id="shoppingCart"></span>
+            </td>
+        </tr>
+    </table>
+    {% endfor %}
+
+
     <div class="text-center">
         <ul class="pagination">
             <li class="disabled">

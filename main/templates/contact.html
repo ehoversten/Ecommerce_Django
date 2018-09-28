@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+
+<div class='contact container'>
+  <div class="welcome row">
+    <div class="col-12">
+      <h2>Welcome to the contact page</h2>
+      <h4>Leave us a message</h4>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class='form-group' style="width:50%">
+      <form method='POST'>
+        {% csrf_token %}
+        {{ form }}
+        <input class='btn btn-primary' type="submit" name="" value="Submit">
+        <!-- <button id="contact-btn" type='submit' class='btn btn-primary'>Submit</button> -->
+      </form>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
