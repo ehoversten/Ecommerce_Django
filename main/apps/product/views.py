@@ -1,15 +1,25 @@
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib import messages
+from django.views.generic import ListView, DetailView
 from .models import Product
 Pro = "product"  # short for Product App
 
 User = get_user_model()
+# landing page for the products
+class Product_landing(ListView):
+    template_name = "product/product_landing.html"
 
+    def get_queryset(self, *args, **kwargs):
+        request = self.request
+        return Product.objects.all()
 
 def product_landing(request):
-    products = Product.objects.all()
-    return render(request, Pro + '/product_landing.html', {'products':products})
+    queryset = Product.objects.all()
+    context = {
+        'object_list': queryset
+    }
+    return render(request, 'product/product_landing.html', context)
 
 
 def product_new(request):

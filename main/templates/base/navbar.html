@@ -1,6 +1,6 @@
 {% url 'home' as home_url %}
 {% url 'contact' as contact_url %}
-{% url 'product' as product_url %}
+{% url 'product:landing' as product_url %}
 {% url 'login' as login_url %}
 {% url 'logout' as logout_url %}
 {% url 'register' as register_url %}
@@ -25,7 +25,7 @@
         <a class="nav-link" href="{{ contact_url }}">Contact</a>
       </li>
       <li class="nav-item {% if request.path == product_url %}active{% endif %}">
-        <a class="nav-link" href="product">Products</a>
+        <a class="nav-link" href="{{ product_url }}">Products</a>
       </li>
 
        <li class="nav-item {% if request.path == logout_url %}active{% endif %}">

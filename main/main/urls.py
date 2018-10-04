@@ -11,7 +11,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns = [
     url(r'^$', home_page, name= 'home'),
     url(r'^admin/', admin.site.urls),
-#     url(r'^product/', include('apps.product.urls', namespace= 'product')),
+    url(r'^product/', include('apps.product.urls', namespace= 'product')),
     url(r'^user/', include('apps.loginRegistration.urls')),
     # url(r'^product/', include('apps.product.urls')),
     url(r'^customer/', include('apps.customer.urls')),

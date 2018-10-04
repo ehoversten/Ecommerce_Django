@@ -1,11 +1,11 @@
 from django.conf.urls import url
 from . import views
-from .views import (product_landing,)
+from .views import (Product_landing, )
  
-app_name = 'product'
+app_name = 'Product'
 urlpatterns = [
     # Get routes
-    url(r'^$',product_landing.as_view(), name='landing'),
+    url(r'^$',Product_landing.as_view(), name ='landing'),
     url(r'^new$', views.product_new, name='new' ), # root page or "landing" page
     url(r'^review$', views.product_review, name='review'), # product review
     url(r'^(?P<product_id>\d+)/detail$', views.producDetail), 
