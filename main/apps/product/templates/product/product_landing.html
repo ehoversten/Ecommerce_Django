@@ -19,71 +19,35 @@
     </form>
     <br>
     <br>
-    <table>
+    {% for obj in object_list %}
+     <table>
 
         <tr>
             <td>
                 <a href="#!">
-                    <img src="http://www.clker.com/cliparts/y/C/q/F/V/b/camerapictogram-md.png" alt="social_media" id="productimg">
+                    <img src="{{ obj.thumb.url}}" alt="social_media" id="productimg">
                 </a>
             </td>
         </tr>
         <tr>
-            <td>
-                <a href="#">
-                    <h5>BALENCIAGA</h5>
-                </a>
+            <td>   
+                    <h5>{{obj.name}}</h5> 
             </td>
         </tr>
         <tr>
             <td>
-                <a href="#">
-                    <h6>KIDS SPEED TRAINERS</h6>
-                </a>
+                    <h6>{{obj.description}}</h6>     
             </td>
         </tr>
         <tr class="price">
             <td>
-                $305
+                ${{obj.price}}
                 <span class="glyphicon glyphicon-shopping-cart" id="shoppingCart"></span>
             </td>
         </tr>
-    </table>
-    {% for product in products %}
-
-    <table>
-
-        <tr>
-            <td>
-                <a href="#!">
-                        <img src="{{ product.thumb.url}}" alt="social_media" id="productimg">
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <a href="#">
-                    <h5>{{product.name}}</h5>
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <a href="#">
-                    <h6>{{product.description}}</h6>
-                </a>
-            </td>
-        </tr>
-        <tr class="price">
-            <td>
-                ${{product.price}}
-                <span class="glyphicon glyphicon-shopping-cart" id="shoppingCart"></span>
-            </td>
-        </tr>
-    </table>
+    </table> 
     {% endfor %}
-
-
+    
     <div class="text-center">
         <ul class="pagination">
             <li class="disabled">
