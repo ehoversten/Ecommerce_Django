@@ -7,12 +7,15 @@ Pro = "product"  # short for Product App
 
 User = get_user_model()
 # landing page for the products
+
+
 class Product_landing(ListView):
     template_name = "product/product_landing.html"
 
     def get_queryset(self, *args, **kwargs):
         request = self.request
         return Product.objects.all()
+
 
 def product_landing(request):
     queryset = Product.objects.all()
@@ -28,7 +31,7 @@ def product_new(request):
     cForm = CategoryModelForm(request.POST)
 
     context = {
-        'form' :form,
+        'form': form,
         'cForm': cForm,
     }
 
@@ -48,8 +51,28 @@ def editProduct(request):
     return render(request, Pro + '/editProduct.html')
 
 
-def producDetail(request):
-    return render(request, Pro + '/producDetail.html')
+def productDetail(request, product_id):
+    print('Hello?')
+    product = Product.objects.get(id=product_id)
+    object = {
+        'product': product,
+    }
+    return render(request, Pro + '/productDetail.html', object)
+
+# slug view as view
+# class ProductDetailSlugView(DetailView):
+#     queryset = Product.objects.all()
+#     template_name = "product/productDetail.html"
+
+#     def get_object(self, *args, **kwargs):
+#         request= self.request
+#         print(request)
+#         slug = self.kwargs.get('slug')
+#         print(slug)
+#         queryset = Product.objects.filter(slug=slug, active=True)
+#         instance = queryset.all()
+#         instance = Product.objects.get(slug=slug, active = True)
+#         return instance
 
 
 # POST or PUT routes for Products
