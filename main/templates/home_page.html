@@ -1,9 +1,9 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+
 {% load static %}
-{% url "products:list" as product_list_url %}
+<!-- {% url "products:list" as product_list_url %} -->
 
-<title>Home Page Template</title>
-
+<!-- <title>Home Page Template</title> -->
 
 {% block content %}
 
@@ -50,12 +50,9 @@
   <div class="container">
     <div class="payments">
       <h3> PAYMENTS </h3>
-      <!-- <a href="#"> Visa & Mastercard </a> -->
       <i class="fab fa-cc-visa fa-2x"></i>
       <i class="fab fa-cc-mastercard fa-2x"></i>
-      <!-- <a href="#"> American Express </a> -->
       <i class="fab fa-cc-amex fa-2x"></i>
-      <!-- <a href="#"> Discover </a> -->
       <i class="fab fa-cc-discover fa-2x"></i>
       <i class="fab fa-cc-stripe fa-2x"></i>
       <i class="fab fa-cc-paypal fa-2x"></i>

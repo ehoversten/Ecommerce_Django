@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
-{% block content%}
+
+{% block content %}
 <div class="container">
     <form action="#">
         <div class="row">
@@ -30,13 +31,13 @@
             </td>
         </tr>
         <tr>
-            <td>   
-                    <h5>{{obj.name}}</h5> 
+            <td>
+                    <h5>{{obj.name}}</h5>
             </td>
         </tr>
         <tr>
             <td>
-                    <h6>{{obj.description}}</h6>     
+                    <h6>{{obj.description}}</h6>
             </td>
         </tr>
         <tr class="price">
@@ -45,35 +46,35 @@
                 <span class="glyphicon glyphicon-shopping-cart" id="shoppingCart"></span>
             </td>
         </tr>
-    </table> 
+    </table>
     {% endfor %}
-    
+
     <div class="text-center">
-        <ul class="pagination">
-            <li class="disabled">
-                <a href="#">«</a>
-            </li>
-            <li class="active">
-                <a href="#">1
-                    <span class="sr-only">(current)</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">2</a>
-            </li>
-            <li>
-                <a href="#">3</a>
-            </li>
-            <li>
-                <a href="#">4</a>
-            </li>
-            <li>
-                <a href="#">5</a>
-            </li>
-            <li>
-                <a href="#">»</a>
-            </li>
-        </ul>
+      <ul class="pagination">
+          <li class="disabled">
+              <a href="#">«</a>
+          </li>
+          <li class="active">
+              <a href="#">1
+                  <span class="sr-only">(current)</span>
+              </a>
+          </li>
+          <li>
+              <a href="#">2</a>
+          </li>
+          <li>
+              <a href="#">3</a>
+          </li>
+          <li>
+              <a href="#">4</a>
+          </li>
+          <li>
+              <a href="#">5</a>
+          </li>
+          <li>
+              <a href="#">»</a>
+          </li>
+      </ul>
     </div>
 </div>
 {% endblock %}

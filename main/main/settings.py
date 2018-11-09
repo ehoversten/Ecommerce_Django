@@ -46,11 +46,11 @@ INSTALLED_APPS = [
 
     # Missing customer from list, updated to reflect changes. - Jose 8/13
     # Local Apps
-    'apps.loginRegistration',
-    'apps.userAdmin',
+    # 'apps.loginRegistration',
+    # 'apps.userAdmin',
     'apps.product',
     'apps.customer',
-    'apps.order',
+    # 'apps.order',
 
     # Not created yet.
     # 'apps.review',
@@ -107,7 +107,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ecommerce',
         'USER': 'root',
-        'PASSWORD':'',
+        'PASSWORD':'root',
         'HOST': 'localhost',
         'PORT': '3306',
     }

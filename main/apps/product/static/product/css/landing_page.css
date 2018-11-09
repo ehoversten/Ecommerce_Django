@@ -4,6 +4,10 @@
     /* outline: 1px solid pink; */
 }
 
+/* body {
+  background: #8e3;
+} */
+
 /* .container, .header, .footer {
     width: 80%;
     margin-top: 2%;
@@ -61,13 +65,13 @@ img {
     font-weight: bold;
 }
 
-.pagination>li>a, .pagination>li>span { 
+.pagination>li>a, .pagination>li>span {
     border-radius: 50% !important;
     margin: 0 5px;
     margin-top: 40px;
 }
 .full {
-    width: 100%;	
+    width: 100%;
 }
 .gap {
 	height: 30px;
@@ -199,5 +203,5 @@ img {
 	padding-top: 6px;
 }
 .payments {
-	font-size: 1.5em;	
+	font-size: 1.5em;
 }

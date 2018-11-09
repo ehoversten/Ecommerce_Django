@@ -28,3 +28,9 @@
 .form-group .btn {
   float: right;
 }
+
+/* NAVBAR STYLES */
+
+.navbar-brand {
+ height: 60px;
+}

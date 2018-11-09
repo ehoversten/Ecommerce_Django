@@ -14,6 +14,12 @@ form {
     margin-top: 2%;
 }
 
+ /* NAVBAR STYLES */
+
+.navbar-brand {
+  height: 60px;
+}
+
 /* CONTACT PAGE STYLES */
 .contact .row {
   background-color: #bbb;
