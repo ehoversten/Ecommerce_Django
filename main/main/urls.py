@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.conf.urls.static import static
 from django.views.generic import TemplateView
 # from apps.userAdmin.views import login_page,register_page, guest_register_view
-from django.contrib.auth.views import LogoutView
+# from django.contrib.auth.views import LogoutView
 from .views import home_page, about_page, contact_page
 from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns

@@ -17,12 +17,12 @@ class Product_landing(ListView):
         return Product.objects.all()
 
 
-def product_landing(request):
-    queryset = Product.objects.all()
-    context = {
-        'object_list': queryset
-    }
-    return render(request, 'product/product_landing.html', context)
+# def product_landing(request):
+#     queryset = Product.objects.all()
+#     context = {
+#         'object_list': queryset
+#     }
+#     return render(request, 'product/product_landing.html', context)
 
 
 def product_new(request):

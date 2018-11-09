@@ -3,6 +3,7 @@ from . import views
 from .views import Product_landing
 
 app_name = 'Product'
+
 urlpatterns = [
     # Get routes
     url(r'^$',Product_landing.as_view(), name ='landing'),
