@@ -2,19 +2,17 @@
 
 
 {% block content %}
-
-
-<div class='container'>
-  <!-- <h1>{{ title }}</h1> -->
-  <h1>Hello, {{ user.name }}!</h1>
-  <h2>Welcome to the contact page.</h2>
-  <!-- <p>{{ content }}</p> -->
-  <div class='form-group' style="width:50%">
-    <form method='POST'>
-    {% csrf_token %}
-      {{ form }}
-      <button type='submit' class='btn btn-primary'>Submit</button>
-    </form>
+<div class="contact_page">
+  <div class='container'>
+    <h2>CONTACT US</h2>
+    <div class='form-group' style="width:50%">
+      <form method='POST'>
+        {% csrf_token %}
+        {{ form }}
+        <button type='submit' class='btn btn-primary'>Submit</button>
+      </form>
+    </div>
   </div>
 </div>
+
 {% endblock %}

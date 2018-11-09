@@ -5,15 +5,30 @@
 }
 
 /* body {
-  background: #8e3;
+  background: #8e3255;
 } */
 
-/* .container, .header, .footer {
-    width: 80%;
-    margin-top: 2%;
-    display: block;
-} */
+.jumbotron {
+  text-align: center;
+}
 
+.border {
+  text-align: center;
+  height: 80px;
+  background-color: #8e3255;
+}
+
+.content {
+  text-align: center;
+}
+
+/* CONTACT PAGE */
+
+.contact_page h2 {
+  text-align: center;
+}
+
+.
 .icon {
     width: 35px;
     height: 35px;

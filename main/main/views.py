@@ -13,6 +13,7 @@ def home_page(request):
 	}
 	return render(request, "home_page.html",context)
 
+
 def about_page(request):
 	context= {
 		"title" : "about"
