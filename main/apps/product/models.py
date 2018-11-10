@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import pre_save, post_save
 from django.db import models
 
+from .utils import unique_slug_generator
 
 """ # product details
 class Category(models.Model):
@@ -45,9 +46,9 @@ class Size(models.Model):
 # Product
  """
 class Product(models.Model):
-    name           = models.CharField(max_length=120)
+    name            = models.CharField(max_length=120)
     description     = models.TextField()
-    # slug			= models.SlugField(blank=True, unique=True)
+    slug			= models.SlugField(blank=True, unique=True)
     price           = models.DecimalField(decimal_places=2, max_digits=20, default=39.99)
     featured        = models.BooleanField(default=False)
     active          = models.BooleanField(default=True)
@@ -67,3 +68,11 @@ class Product(models.Model):
     def __str__(self):
         info = self.name + " " + str(self.price)
         return info
+
+# SIGNALS -> PRE_SAVE
+def product_presave_reciever(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        instance.slug = unique_slug_generator(instance)
+
+
+pre_save.connect(product_presave_reciever, sender=Product)

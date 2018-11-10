@@ -3,6 +3,8 @@ from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib import messages
 from django.views.generic import ListView, DetailView
 from .models import Product
+
+
 Pro = "product"  # short for Product App
 
 User = get_user_model()
@@ -16,6 +18,26 @@ class Product_landing(ListView):
         request = self.request
         return Product.objects.all()
 
+# CLASS BASED VIEWS
+# class ProductListView(ListView):
+#     # queryset = Product.objects.all()
+#     template_name = "products/product_landing.html"
+#
+#     def get_queryset(self, *args, **kwargs):
+#         request = self.request
+#         return Product.objects.all()
+
+class ProductDetailSlugView(DetailView):
+    queryset = Product.objects.all()
+    template_name = "product/productDetail.html"
+
+    def get_object(self, *args, **kwargs):
+        request = self.request
+        slug = self.kwargs.get('slug')
+        instance = get_object_or_404(Product, slug=slug)
+        if instance is None:
+            raise Http404("Product not listed here!")
+        return instance
 
 # def product_landing(request):
 #     queryset = Product.objects.all()
