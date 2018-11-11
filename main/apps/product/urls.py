@@ -14,7 +14,6 @@ urlpatterns = [
     # instead of using product id we render product by its slug number
     # url(r'^(?P<slug>[\w-]+)/$', ProductDetailSlugView.as_view(), name='detail'),
     url(r'^(?P<slug>[\w-]+)/$', ProductDetailSlugView.as_view()),
-    # url(r'^product/(?P<slug>[\w-]+)/$', ProductDetailSlugView.as_view()),
     # Post or Put Routes
 #    url(r'^/(?P<x>\d+)$/update', views.updateProduct),
 #    url(r'^/(?P<x>\d+)$/delete', views.deleteProduct),

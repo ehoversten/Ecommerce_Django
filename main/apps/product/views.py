@@ -49,7 +49,8 @@ class ProductDetailSlugView(DetailView):
 
 def product_new(request):
     # forms instances
-    form = productForm(request.POST, request.FILES)
+    # form = productForm(request.POST, request.FILES)
+    form = productForm()
     cForm = CategoryModelForm(request.POST)
 
     context = {
@@ -58,7 +59,9 @@ def product_new(request):
     }
 
     if request.method == 'POST':
+        form = productForm(request.POST)
         if form.is_valid():
+
             print(form)
         return redirect('product:landing')
     else:
