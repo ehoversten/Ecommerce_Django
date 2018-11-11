@@ -11,21 +11,14 @@ User = get_user_model()
 # landing page for the products
 
 
-class Product_landing(ListView):
+# CLASS BASED VIEWS
+class ProductListView(ListView):
     template_name = "product/product_landing.html"
 
     def get_queryset(self, *args, **kwargs):
         request = self.request
         return Product.objects.all()
 
-# CLASS BASED VIEWS
-# class ProductListView(ListView):
-#     # queryset = Product.objects.all()
-#     template_name = "products/product_landing.html"
-#
-#     def get_queryset(self, *args, **kwargs):
-#         request = self.request
-#         return Product.objects.all()
 
 class ProductDetailSlugView(DetailView):
     queryset = Product.objects.all()
@@ -38,6 +31,8 @@ class ProductDetailSlugView(DetailView):
         if instance is None:
             raise Http404("Product not listed here!")
         return instance
+
+# FUNCTION-BASED VIEWS
 
 # def product_landing(request):
 #     queryset = Product.objects.all()
@@ -84,20 +79,6 @@ def productDetail(request, product_id):
     }
     return render(request, Pro + '/productDetail.html', object)
 
-# slug view as view
-# class ProductDetailSlugView(DetailView):
-#     queryset = Product.objects.all()
-#     template_name = "product/productDetail.html"
-
-#     def get_object(self, *args, **kwargs):
-#         request= self.request
-#         print(request)
-#         slug = self.kwargs.get('slug')
-#         print(slug)
-#         queryset = Product.objects.filter(slug=slug, active=True)
-#         instance = queryset.all()
-#         instance = Product.objects.get(slug=slug, active = True)
-#         return instance
 
 
 # POST or PUT routes for Products
