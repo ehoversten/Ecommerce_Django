@@ -5,11 +5,9 @@ from django.views.generic import ListView, DetailView
 from .models import Product
 
 
-Pro = "product"  # short for Product App
+Pro = "product"  # short for Product App  ?-?-?
 
 User = get_user_model()
-# landing page for the products
-
 
 # CLASS BASED VIEWS
 class ProductListView(ListView):
@@ -31,6 +29,8 @@ class ProductDetailSlugView(DetailView):
         if instance is None:
             raise Http404("Product not listed here!")
         return instance
+
+
 
 # FUNCTION-BASED VIEWS
 

@@ -3,8 +3,8 @@ from django.contrib import admin
 from django.conf.urls.static import static
 from django.views.generic import TemplateView
 # from apps.userAdmin.views import login_page,register_page, guest_register_view
-# from django.contrib.auth.views import LogoutView
-from .views import home_page, about_page, contact_page
+from django.contrib.auth.views import LogoutView
+from .views import home_page, about_page, contact_page, login_page, register_page
 from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
@@ -19,9 +19,9 @@ urlpatterns = [
 
 
     # new login and register logout url nav bar
-    # url(r'^register/$', register_page,name='register'),
-    # url(r'^login/$', login_page, name='login'),
-    # url(r'^logout/$', LogoutView.as_view(), name='logout'),
+    url(r'^register/$', register_page, name='register'),
+    url(r'^login/$', login_page, name='login'),
+    url(r'^logout/$', LogoutView.as_view(), name='logout'),
     # contact navbar
     url(r'^contact$', contact_page, name='contact'),
 
