@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth import authenticate, login, get_user_model
+from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.conf import settings
 
 from .forms import ContactForm, LoginForm, RegisterForm
@@ -31,19 +31,6 @@ def contact_page(request):
 		print(contact_form.cleaned_data)
 
 	return render(request, "contact.html",context)
-
-# def login_page(request):
-# 	form = LoginForm(request.POST or None)
-# 	context = {
-# 		'form' : form
-# 	}
-# 	# print(request.user.is_authenticated())
-# 	if form.is_valid():
-# 		print(form.cleaned_data)
-# 		# clear form fields
-# 		context['form'] = LoginForm()
-#
-# 	return render(request, "auth/login.html", context)
 
 
 def login_page(request):
@@ -91,3 +78,9 @@ def register_page(request):
 		print("Error.. Danger Will Robinson!")
 
 	return render(request, 'auth/register.html', context)
+
+
+def logout_view(request):
+    if request.method == 'POST':
+        logout(request)
+        return redirect('/')
