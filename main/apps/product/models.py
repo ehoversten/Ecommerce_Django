@@ -58,8 +58,8 @@ class Product(models.Model):
     # category        = models.CharField(max_length=120)
 
     created_at      = models.DateTimeField(auto_now_add=True)
-    updated_at      = models.DateTimeField(auto_now_add=True)
-    timestamp       = models.DateTimeField(auto_now_add=True)
+    updated_at      = models.DateTimeField(auto_now=True)
+    # timestamp       = models.DateTimeField(auto_now_add=True)
 
     # could also be done like this
     def __repr__(self):
