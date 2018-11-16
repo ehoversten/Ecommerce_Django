@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.db.models.signals import pre_save, post_save
 
 from apps.product.models import Product
 
@@ -7,6 +8,22 @@ User = settings.AUTH_USER_MODEL
 
 
 class CartManager(models.Manager):
+
+    def new_or_get(self, request):
+        cart_id = request.session.get("cart_id", None)
+        qs = self.get_queryset().filter(id=cart_id)
+        if qs.exists() and qs.count() == 1:
+            new_obj = False
+            cart_obj = qs.first()
+            if request.user.is_authenticated() and cart_obj.user is None:
+                cart_obj.user = request.user
+                cart_obj.save()
+        else:
+            cart_obj = Cart.objects.new_cart(user=request.user)
+            new_obj = True
+            request.session['cart_id'] = cart_obj.id
+        return cart_obj, new_obj
+
     def new_cart(self, user=None):
         user_obj = None
         if user is not None:
@@ -28,3 +45,9 @@ class Cart(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+    def __repr__(self):
+        return "<Cart object: {}: {}>".format(self.id, self.total)
+
+def pre_save_cart_reciever(sender, instance, *args, **kwargs):
+    
