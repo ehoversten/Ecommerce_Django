@@ -66,7 +66,7 @@ class Product(models.Model):
         return "<User {} | {} | {}>".format(self.id, self.name, self.description)
 
     def __str__(self):
-        info = self.name + " " + str(self.price)
+        info = str(self.id) + " " + self.name + " " + str(self.price)
         return info
 
 # SIGNALS -> PRE_SAVE

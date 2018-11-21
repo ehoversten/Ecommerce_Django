@@ -2,8 +2,10 @@ from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib import messages
 from django.views.generic import ListView, DetailView
-from .models import Product
 
+
+from .models import Product
+from apps.carts.models import Cart 
 
 Pro = "product"  # short for Product App  ?-?-?
 
@@ -21,6 +23,12 @@ class ProductListView(ListView):
 class ProductDetailSlugView(DetailView):
     queryset = Product.objects.all()
     template_name = "product/productDetail.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(ProductDetailSlugView, self).get_context_data(*args, **kwargs)
+        cart_obj, new_object = Cart.objects.new_or_get(self.request)
+        context['cart'] = cart_obj
+        return context 
 
     def get_object(self, *args, **kwargs):
         request = self.request
