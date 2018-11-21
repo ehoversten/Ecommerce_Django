@@ -18,8 +18,10 @@
             <tbody>
                 {% for product in cart.products.all %}
                 <tr>
-                    <th scope="row">{{ product.id }}</th>
-                    <td><a href='{% url "product:detail" slug=product.slug %}''>{{ product.name }}</a> <a href="#">Remove Item</a></td>
+                    <th>{{ product.id }}</th>
+                    <td><a href='{% url "product:detail" slug=product.slug %}''>{{ product.name }}</a>
+                        {% include 'product/snippets/update-cart.html' with product=product cart=cart in_cart=True %}
+                    </td>
                     <td>{{ product.price }}</td>
                 </tr>
                 {% endfor %}
