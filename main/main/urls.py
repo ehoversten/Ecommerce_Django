@@ -1,10 +1,12 @@
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf.urls.static import static
+
 from django.views.generic import TemplateView
-from apps.userAdmin.views import login_page,register_page, guest_register_view
+# from apps.userAdmin.views import login_page,register_page, guest_register_view
 from django.contrib.auth.views import LogoutView
-from .views import home_page, about_page, contact_page
+from .views import home_page, about_page, contact_page, login_page, register_page, logout_view
+
 from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
@@ -12,18 +14,20 @@ urlpatterns = [
     url(r'^$', home_page, name= 'home'),
     url(r'^admin/', admin.site.urls),
     url(r'^product/', include('apps.product.urls', namespace= 'product')),
-    url(r'^user/', include('apps.loginRegistration.urls')),
-    # url(r'^product/', include('apps.product.urls')),
+    url(r'^cart/', include('apps.carts.urls', namespace='cart')),
+
+    # url(r'^user/', include('apps.loginRegistration.urls')),
     url(r'^customer/', include('apps.customer.urls')),
     # url(r'^order/', include('apps.order.urls')),
-    # url(r'^product/', include('apps.product.urls', namespace= 'product')),
     # url(r'^', include('apps.ecommerce.urls')),  # when we hit he root route it will take us there.
 
 
     # new login and register logout url nav bar
-    url(r'^register/$', register_page,name='register'),
+    url(r'^register/$', register_page, name='register'),
     url(r'^login/$', login_page, name='login'),
-    url(r'^logout/$', LogoutView.as_view(), name='logout'),
+    # url(r'^logout/$', LogoutView.as_view(), name='logout'),
+    url(r'^logout/$', logout_view, name='logout'),
+
     # contact navbar
     url(r'^contact$', contact_page, name='contact'),
 

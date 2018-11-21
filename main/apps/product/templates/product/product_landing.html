@@ -1,79 +1,80 @@
 {% extends 'base.html' %}
-{% block content%}
+
+{% block content %}
 <div class="container">
     <form action="#">
-        <div class="row">
-            <div class="col-sm-6 col-sm-offset-3">
-                <div id="imaginary_container">
-                    <div class="input-group stylish-input-group">
-                        <input type="text" class="form-control" id="searchBar" placeholder="Search">
-                        <span class="input-group-addon">
-                            <button type="submit">
-                                <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                        </span>
-                    </div>
-                </div>
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+          <div id="imaginary_container">
+            <div class="input-group stylish-input-group">
+              <input type="text" class="form-control" id="searchBar" placeholder="Search">
+              <span class="input-group-addon">
+                <button type="submit">
+                  <span class="glyphicon glyphicon-search"></span>
+                </button>
+              </span>
             </div>
+          </div>
         </div>
+      </div>
     </form>
     <br>
     <br>
     {% for obj in object_list %}
      <table>
 
-        <tr>
-            <td>
-                <a href="./{{product.id}}/productDetail">
-                    <img src="{{ obj.thumb.url}}" alt="social_media" id="productimg">
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <td>   
-                    <h5>{{obj.name}}</h5> 
-            </td>
-        </tr>
-        <tr>
-            <td>
-                    <h6>{{obj.description}}</h6>     
-            </td>
-        </tr>
-        <tr class="price">
-            <td>
-                ${{obj.price}}
-                <span class="glyphicon glyphicon-shopping-cart" id="shoppingCart"></span>
-            </td>
-        </tr>
-    </table> 
+      <tr>
+        <td>
+          <a href="{{ obj.slug }}">
+            <img src="{{ obj.thumb.url }}" alt="social_media" id="productimg">
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h5>{{ obj.name }}</h5>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h6>{{ obj.description }}</h6>
+        </td>
+      </tr>
+      <tr class="price">
+        <td>
+          ${{obj.price}}
+          <span class="glyphicon glyphicon-shopping-cart" id="shoppingCart"></span>
+        </td>
+      </tr>
+    </table>
     {% endfor %}
-    
+
     <div class="text-center">
-        <ul class="pagination">
-            <li class="disabled">
-                <a href="#">«</a>
-            </li>
-            <li class="active">
-                <a href="#">1
-                    <span class="sr-only">(current)</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">2</a>
-            </li>
-            <li>
-                <a href="#">3</a>
-            </li>
-            <li>
-                <a href="#">4</a>
-            </li>
-            <li>
-                <a href="#">5</a>
-            </li>
-            <li>
-                <a href="#">»</a>
-            </li>
-        </ul>
+      <ul class="pagination">
+        <li class="disabled">
+          <a href="#">«</a>
+        </li>
+        <li class="active">
+          <a href="#">1
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">2</a>
+        </li>
+        <li>
+          <a href="#">3</a>
+        </li>
+        <li>
+          <a href="#">4</a>
+        </li>
+        <li>
+          <a href="#">5</a>
+        </li>
+        <li>
+          <a href="#">»</a>
+        </li>
+      </ul>
     </div>
 </div>
 {% endblock %}

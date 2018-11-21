@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import pre_save, post_save
 from django.db import models
 
+from .utils import unique_slug_generator
 
 """ # product details
 class Category(models.Model):
@@ -42,27 +43,36 @@ class Size(models.Model):
 #         return self.name
 
 
-# Product 
+# Product
  """
 class Product(models.Model):
-    name           = models.CharField(max_length=120)
+    name            = models.CharField(max_length=120)
     description     = models.TextField()
     slug			= models.SlugField(blank=True, unique=True)
     price           = models.DecimalField(decimal_places=2, max_digits=20, default=39.99)
     featured        = models.BooleanField(default=False)
     active          = models.BooleanField(default=True)
-    thumb = models.ImageField(default='default.svg.png', blank=True)
-    color           = models.CharField(max_length=120)
-    size            = models.CharField(max_length=120)
-    category        = models.CharField(max_length=120)
-
+    thumb           = models.ImageField(default='default.svg.png', blank=True)
+    # color           = models.CharField(max_length=120)
+    # size            = models.CharField(max_length=120)
+    # category        = models.CharField(max_length=120)
 
     created_at      = models.DateTimeField(auto_now_add=True)
-    updated_at      = models.DateTimeField(auto_now_add=True)
-    timestamp       = models.DateTimeField(auto_now_add=True)
+    updated_at      = models.DateTimeField(auto_now=True)
+    # timestamp       = models.DateTimeField(auto_now_add=True)
+
     # could also be done like this
-    # def __repr__(self):
-    #     return "<User {} | {} | {}>".format(self.id, self.name, self.description)
+    def __repr__(self):
+        return "<User {} | {} | {}>".format(self.id, self.name, self.description)
+
     def __str__(self):
-        info = self.name + " " + str(self.price)
+        info = str(self.id) + " " + self.name + " " + str(self.price)
         return info
+
+# SIGNALS -> PRE_SAVE
+def product_presave_reciever(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        instance.slug = unique_slug_generator(instance)
+
+
+pre_save.connect(product_presave_reciever, sender=Product)

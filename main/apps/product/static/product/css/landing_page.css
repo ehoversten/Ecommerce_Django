@@ -4,12 +4,31 @@
     /* outline: 1px solid pink; */
 }
 
-/* .container, .header, .footer {
-    width: 80%;
-    margin-top: 2%;
-    display: block;
+/* body {
+  background: #8e3255;
 } */
 
+.jumbotron {
+  text-align: center;
+}
+
+.border {
+  text-align: center;
+  height: 80px;
+  background-color: #8e3255;
+}
+
+.content {
+  text-align: center;
+}
+
+/* CONTACT PAGE */
+
+.contact_page h2 {
+  text-align: center;
+}
+
+.
 .icon {
     width: 35px;
     height: 35px;
@@ -61,20 +80,23 @@ img {
     font-weight: bold;
 }
 
-.pagination>li>a, .pagination>li>span { 
+.pagination>li>a, .pagination>li>span {
     border-radius: 50% !important;
     margin: 0 5px;
     margin-top: 40px;
 }
+
 .full {
-    width: 100%;	
+    width: 100%;
 }
+
 .gap {
 	height: 30px;
 	width: 100%;
 	clear: both;
 	display: block;
 }
+
 .footer {
 	background: #EDEFF1;
 	height: auto;
@@ -84,12 +106,15 @@ img {
 	border-bottom: 1px solid #CCCCCC;
 	border-top: 1px solid #DDDDDD;
 }
+
 .footer p {
 	margin: 0;
 }
+
 .footer img {
 	max-width: 100%;
 }
+
 .footer h3 {
 	border-bottom: 1px solid #BAC1C8;
 	color: #54697E;
@@ -99,6 +124,7 @@ img {
 	padding: 40px 0 10px;
 	text-transform: uppercase;
 }
+
 .footer ul {
 	font-size: 13px;
 	list-style-type: none;
@@ -107,13 +133,16 @@ img {
 	margin-top: 15px;
 	color: #7F8C8D;
 }
+
 .footer ul li a {
 	padding: 0 0 5px 0;
 	display: block;
 }
+
 .footer a {
 	color: #78828D
 }
+
 .supportLi h4 {
 	font-size: 20px;
 	font-weight: lighter;
@@ -121,6 +150,7 @@ img {
 	margin-bottom: 0 !important;
 	padding-bottom: 0;
 }
+
 .newsletter-box input#appendedInputButton {
 	background: #FFFFFF;
 	display: inline-block;
@@ -129,6 +159,7 @@ img {
 	clear: both;
 	width: 100%;
 }
+
 .newsletter-box .btn {
 	border: medium none;
 	-webkit-border-radius: 3px;
@@ -142,13 +173,16 @@ img {
 	width: 100%;
 	color: #fff;
 }
+
 .newsletter-box {
 	overflow: hidden;
 }
+
 .bg-gray {
 	background-image: -moz-linear-gradient(center bottom, #BBBBBB 0%, #F0F0F0 100%);
 	box-shadow: 0 1px 0 #B4B3B3;
 }
+
 .social li {
 	background: none repeat scroll 0 0 #B5B5B5;
 	border: 2px solid #B5B5B5;
@@ -170,6 +204,7 @@ img {
 	-ms-transition: all 0.5s ease 0s;
 	-o-transition: all 0.5s ease 0s;
 }
+
 .social li:hover {
 	transform: scale(1.15) rotate(360deg);
 	-webkit-transform: scale(1.1) rotate(360deg);
@@ -177,27 +212,33 @@ img {
 	-ms-transform: scale(1.1) rotate(360deg);
 	-o-transform: scale(1.1) rotate(360deg);
 }
+
 .social li a {
 	color: #EDEFF1;
 }
+
 .social li:hover {
 	border: 2px solid #2c3e50;
 	background: #2c3e50;
 }
+
 .social li a i {
 	font-size: 16px;
 	margin: 0 0 0 5px;
 	color: #EDEFF1 !important;
 }
+
 .footer-bottom {
 	background: #E3E3E3;
 	border-top: 1px solid #DDDDDD;
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
+
 .footer-bottom p.pull-left {
 	padding-top: 6px;
 }
+
 .payments {
-	font-size: 1.5em;	
+	font-size: 1.5em;
 }

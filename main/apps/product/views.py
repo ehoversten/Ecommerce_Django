@@ -2,14 +2,17 @@ from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib import messages
 from django.views.generic import ListView, DetailView
+
+
 from .models import Product
-Pro = "product"  # short for Product App
+from apps.carts.models import Cart 
+
+Pro = "product"  # short for Product App  ?-?-?
 
 User = get_user_model()
-# landing page for the products
 
-
-class Product_landing(ListView):
+# CLASS BASED VIEWS
+class ProductListView(ListView):
     template_name = "product/product_landing.html"
 
     def get_queryset(self, *args, **kwargs):
@@ -17,17 +20,40 @@ class Product_landing(ListView):
         return Product.objects.all()
 
 
-def product_landing(request):
+class ProductDetailSlugView(DetailView):
     queryset = Product.objects.all()
-    context = {
-        'object_list': queryset
-    }
-    return render(request, 'product/product_landing.html', context)
+    template_name = "product/productDetail.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(ProductDetailSlugView, self).get_context_data(*args, **kwargs)
+        cart_obj, new_object = Cart.objects.new_or_get(self.request)
+        context['cart'] = cart_obj
+        return context 
+
+    def get_object(self, *args, **kwargs):
+        request = self.request
+        slug = self.kwargs.get('slug')
+        instance = get_object_or_404(Product, slug=slug)
+        if instance is None:
+            raise Http404("Product not listed here!")
+        return instance
+
+
+
+# FUNCTION-BASED VIEWS
+
+# def product_landing(request):
+#     queryset = Product.objects.all()
+#     context = {
+#         'object_list': queryset
+#     }
+#     return render(request, 'product/product_landing.html', context)
 
 
 def product_new(request):
     # forms instances
-    form = productForm(request.POST, request.FILES)
+    # form = productForm(request.POST, request.FILES)
+    form = productForm()
     cForm = CategoryModelForm(request.POST)
 
     context = {
@@ -36,7 +62,9 @@ def product_new(request):
     }
 
     if request.method == 'POST':
+        form = productForm(request.POST)
         if form.is_valid():
+
             print(form)
         return redirect('product:landing')
     else:
@@ -59,20 +87,6 @@ def productDetail(request, product_id):
     }
     return render(request, Pro + '/productDetail.html', object)
 
-# slug view as view
-# class ProductDetailSlugView(DetailView):
-#     queryset = Product.objects.all()
-#     template_name = "product/productDetail.html"
-
-#     def get_object(self, *args, **kwargs):
-#         request= self.request
-#         print(request)
-#         slug = self.kwargs.get('slug')
-#         print(slug)
-#         queryset = Product.objects.filter(slug=slug, active=True)
-#         instance = queryset.all()
-#         instance = Product.objects.get(slug=slug, active = True)
-#         return instance
 
 
 # POST or PUT routes for Products

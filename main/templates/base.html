@@ -18,12 +18,13 @@
 
     <title>Base Templates</title>
     <link rel="stylesheet" href="{% static 'styles.css' %}">
-      <!-- {% include 'base/styles.css' %} -->
+    <!-- {% include 'base/styles.css' %} -->
   </head>
 
   <body>
-      <!-- {% include 'base/navbar.html' with brand_name='Shop The Dojo'%} -->
-    {% include 'base/navigation.html' with brand_name='Shop The Dojo'%}
+    <!-- {% include 'base/navbar.html' with brand_name='Shop The Dojo'%} -->
+    <!-- {% include 'base/navbar.html' %} -->
+    {% include 'base/navigation.html' %}
 
     {% block content %} {% endblock %}
 
@@ -33,10 +34,10 @@
 
     <script>
 
-          {%block jquery%}
+      {% block jquery %}
 
-          
-          {%endblock%}
+
+      {% endblock %}
 
 
     </script>
