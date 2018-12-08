@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'apps.product',
     'apps.customer',
     'apps.carts',
-    # 'apps.order',
+    'apps.orders',
 
     # Not created yet.
     # 'apps.review',
