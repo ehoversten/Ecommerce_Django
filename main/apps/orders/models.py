@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models.signals import pre_save
+from main.utils import unique_order_id_generator
 
 from apps.carts.models import Cart
 
@@ -15,6 +17,8 @@ ORDER_STATUS_CHOICES = (
 
 class Order(models.Model):
     # pk / id
+
+    # unique, random?
     order_id = models.CharField(max_length=120, blank=True)
     # billing_profile
     # shipping_address
@@ -28,6 +32,11 @@ class Order(models.Model):
         return self.order_id
 
 
+# GENERATE THE ORDER ID
+def pre_save_create_order_id(sender, instance, *args, **kwargs):
+    if not instance.order_id:
+        instance.order_id = unique_order_id_generator(instance)
 
-    # GENERATE THE ORDER ID
+pre_save.connect(pre_save_create_order_id, sender=Order)
+
     # GENERATE THE ORDER TOTAL

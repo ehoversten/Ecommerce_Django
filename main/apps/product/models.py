@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import pre_save, post_save
 from django.db import models
 
-from .utils import unique_slug_generator
+from main.utils import unique_slug_generator
 
 """ # product details
 class Category(models.Model):
