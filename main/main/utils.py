@@ -10,7 +10,6 @@ def random_string_generator(size=10, chars=string.ascii_lowercase + string.digit
 # print(random_string_generator())
 # print(random_string_generator(size=50))
 
-
 def unique_order_id_generator(instance):
     ''' This is for generating a new ORDER_ID field '''
     # generate new order_id
@@ -21,7 +20,6 @@ def unique_order_id_generator(instance):
     if qs_exists:
         return unique_slug_generator(instance)  
     return new_order_id
-
 
 
 def unique_slug_generator(instance, new_slug=None):
