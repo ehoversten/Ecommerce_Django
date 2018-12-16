@@ -12,7 +12,7 @@ class CartManager(models.Manager):
     def new_or_get(self, request):
         cart_id = request.session.get("cart_id", None)
         qs = self.get_queryset().filter(id=cart_id)
-        if qs.count == 1:
+        if qs.count() == 1:
             new_obj = False
             cart_obj = qs.first()
             if request.user.is_authenticated() and cart_obj.user is None:
@@ -24,7 +24,7 @@ class CartManager(models.Manager):
             request.session['cart_id'] = cart_obj.id
         return cart_obj, new_obj
 
-    def new(self, user=None):
+    def new_cart(self, user=None):
         user_obj = None
         if user is not None:
             if user.is_authenticated():
@@ -42,6 +42,7 @@ class Cart(models.Model):
     created_at  = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    # Attach CartManager()
     objects = CartManager()
 
     def __str__(self):
