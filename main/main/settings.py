@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'apps.customer',
     'apps.carts',
     'apps.orders',
+    'apps.accounts',
 
     # Not created yet.
     # 'apps.review',
@@ -67,6 +68,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
+
+
+LOGOUT_REDIRECT_URL = '/login/'
 
 ROOT_URLCONF = 'main.urls'
 
@@ -157,4 +161,5 @@ STATICFILES_DIRS = (
 )
 
 MEDIA_URL = '/media/'
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

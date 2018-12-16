@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<div class="contact_page">
+    <div class='container'>
+        <h2>Register</h2>
+        <div class='form-group' style="width:50%">
+            <form method='POST'>
+                {% csrf_token %}
+                {{ form }}
+                <button type='submit' class='btn btn-primary'>Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
