@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 
 from .models import Cart
+from apps.orders.models import Order
 from apps.product.models import Product
 
 #  CREATE CART METHOD
@@ -11,6 +12,7 @@ from apps.product.models import Product
 
 # Create your views here.
 def cart_home(request):
+    # grab the cart object
     cart_obj, new_obj = Cart.objects.new_or_get(request)
     context = {
         "cart":cart_obj,
@@ -40,4 +42,17 @@ def cart_update(request):
         
     return redirect("cart:home")
 
+def checkout_home(request):
+    # grab the cart object
+    cart_obj, cart_created = Cart.objects.new_or_get(request)
+    order_obj = None
+    if cart_created or cart_obj.products.count() == 0:
+        return redirect('cart:home')
+    else:
+        # grab the order object
+        order_obj, new_order_obj = Order.objects.get_or_create(cart=cart_obj)
 
+    context = {
+        "object": order_obj,
+    }
+    return render(request, "carts/checkout.html", context)

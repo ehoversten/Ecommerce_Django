@@ -6,7 +6,6 @@ from apps.product.models import Product
 
 User = settings.AUTH_USER_MODEL
 
-
 class CartManager(models.Manager):
 
     def new_or_get(self, request):
@@ -70,7 +69,7 @@ m2m_changed.connect(m2m_changed_cart_reciever, sender=Cart.products.through)
 
 def pre_save_cart_reciever(sender, instance, *args, **kwargs):
     if instance.subtotal > 0:
-        instance.total = instance.subtotal + 10
+        instance.total = float(instance.subtotal) * float(1.08)  # -> add 8% Tax
     else:
         instance.total = 0.00
 
