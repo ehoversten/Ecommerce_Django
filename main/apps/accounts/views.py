@@ -4,7 +4,8 @@ from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.conf import settings
 from django.utils.http import is_safe_url
 
-from .forms import LoginForm, RegisterForm
+from .forms import LoginForm, RegisterForm, GuestForm
+from .models import GuestEmail
 
 User = settings.AUTH_USER_MODEL
 # Create your views here.
@@ -66,3 +67,34 @@ def logout_view(request):
     if request.method == 'POST':
         logout(request)
         return redirect('/')
+
+
+def guest_register_view(request):
+    form = GuestForm(request.POST or None)
+    context = {
+        "form": form
+    }
+
+    # HANDELING REDIRECTS
+    next_ = request.GET.get('next')
+    next_post = request.POST.get('next')
+    redirect_path = next_ or next_post or None
+
+    # check if form data is valid
+    if form.is_valid():
+        # Grab the validated email
+        email = form.cleaned_data.get("email")
+        # Create a new GuestEmail obj -> assign email
+        new_guest_email = GuestEmail.objects.create(email=email)
+        # Put the guest ID in session
+        request.session['guest_email_id'] = new_guest_email.id
+        # Redirect back to prior page before guest login required
+        if is_safe_url(redirect_path, request.get_host()):
+            return redirect(redirect_path)
+        else:
+            return redirect('/register')
+    else:
+        # Return an 'invalid login' error message.
+        print("Error logging in!")
+
+    return redirect('/register')

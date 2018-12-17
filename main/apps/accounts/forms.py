@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 
 User = get_user_model()
 
+class GuestForm(forms.Form):
+	email = forms.EmailField()
 
 class LoginForm(forms.Form):
 	username = forms.CharField(
