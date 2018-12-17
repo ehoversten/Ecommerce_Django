@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-
+from apps.accounts.forms import LoginForm
 from .models import Cart
 from apps.orders.models import Order
 from apps.product.models import Product
@@ -52,7 +52,17 @@ def checkout_home(request):
         # grab the order object
         order_obj, new_order_obj = Order.objects.get_or_create(cart=cart_obj)
 
+    # grab the user
+    user = request.user
+    billing_profile = None
+    login_form = LoginForm()
+
+    if user.is_authenticated():
+        billing_profile, billing_profile_created = BillingProfile.objects.get_or_create(user=user, email=user.email)
+
     context = {
         "object": order_obj,
+        "billing_profile": billing_profile,
+        "login_form": login_form,
     }
     return render(request, "carts/checkout.html", context)
