@@ -4,29 +4,43 @@ from django.db.models.signals import pre_save, post_save, m2m_changed
 
 from apps.product.models import Product
 
+# BUILT IN DJANGO USER MODEL
 User = settings.AUTH_USER_MODEL
 
 class CartManager(models.Manager):
 
     def new_or_get(self, request):
+        # retrieve cart ID or object=None
         cart_id = request.session.get("cart_id", None)
+        # filter queryset with found cart_id
         qs = self.get_queryset().filter(id=cart_id)
+        # Found query
         if qs.count() == 1:
+            # Initalize obj variable
             new_obj = False
+            # Initalize cart object
             cart_obj = qs.first()
+            # Associate logged in user with cart
             if request.user.is_authenticated() and cart_obj.user is None:
                 cart_obj.user = request.user
                 cart_obj.save()
         else:
+            # Create a new cart with logged in user association
             cart_obj = Cart.objects.new_cart(user=request.user)
+            # Initalize obj variable
             new_obj = True
+            # Load cart_id in session context
             request.session['cart_id'] = cart_obj.id
         return cart_obj, new_obj
 
     def new_cart(self, user=None):
+        # initalize obj variable -> User object
         user_obj = None
+        # User exists -> (?)
         if user is not None:
+            # logged in -> (?)
             if user.is_authenticated():
+                # assign user object
                 user_obj = user
         return self.model.objects.create(user=user_obj)
 
@@ -54,23 +68,33 @@ class Cart(models.Model):
 # CALLED WHENEVER WE HIT SAVE
 def m2m_changed_cart_reciever(sender, instance, action, *args, **kwargs):
     if action == 'post_add' or action == 'post_remove' or action == 'post_clear':
-        print(action)
+        # print(action)
+        # QUERYSET
         products = instance.products.all()
+        # Initalize calculation variable -> 'total'
         total = 0
+        # Loop through products
         for item in products:
+            # find total 
             total += item.price
             print("ITEM: ", item)
+        if instance.subtotal != total:
+            # assign -> 'subtotal'
             instance.subtotal = total
             instance.save()
         print("Total: ", total)
 
-
+# Connect signal
 m2m_changed.connect(m2m_changed_cart_reciever, sender=Cart.products.through)
 
 def pre_save_cart_reciever(sender, instance, *args, **kwargs):
+    # Subtotal exists -> (?) 
     if instance.subtotal > 0:
+        # Calculate Sales Tax
         instance.total = float(instance.subtotal) * float(1.08)  # -> add 8% Tax
     else:
+        # Assign Zero Dollars -> 'total'
         instance.total = 0.00
 
+# Connect signal
 pre_save.connect(pre_save_cart_reciever, sender=Cart)

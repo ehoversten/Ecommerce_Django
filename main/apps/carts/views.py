@@ -45,35 +45,40 @@ def cart_update(request):
 
 def checkout_home(request):
     # grab the cart object
+    print(request)
     cart_obj, cart_created = Cart.objects.new_or_get(request)
     order_obj = None
     if cart_created or cart_obj.products.count() == 0:
         return redirect('cart:home')
-    else:
-        # grab the order object
-        order_obj, new_order_obj = Order.objects.get_or_create(cart=cart_obj)
 
     # grab the user
-    user = request.user
+    # user = request.user
     # Give the Billing Profile a default -> None
-    billing_profile = None
+    # billing_profile = None
     # Initalize Forms
     login_form = LoginForm()
     guest_form = GuestForm()
-    # Load into --> session 
-    guest_email_id = request.session.get('guest_email_id')
 
-    if user.is_authenticated():
-        # Get or Initalize a Billing Profile with current user and email
-        billing_profile, billing_profile_created = BillingProfile.objects.get_or_create(user=user, email=user.email)
-    elif guest_email_id is not None:
-        # Grab the guest ID
-        guest_email_obj = GuestEmail.objects.get(id=guest_email_id)
-        # Get or Initalize a Billing Profile with guest user and guest email
-        billing_profile, billing_profile_created = BillingProfile.objects.get_or_create(
-            email=guest_email_obj.email)
-    else: 
-        pass
+    # Get or Initalize a Billing Profile with current logged in or guest user
+    billing_profile, billing_profile_created = BillingProfile.objects.new_or_get(request)
+
+    # Load into --> session 
+    # guest_email_id = request.session.get('guest_email_id')
+    # if user.is_authenticated():
+    #     # Get or Initalize a Billing Profile with current user and email
+    #     billing_profile, billing_profile_created = BillingProfile.objects.get_or_create(user=user, email=user.email)
+    # elif guest_email_id is not None:
+    #     # Grab the guest ID
+    #     guest_email_obj = GuestEmail.objects.get(id=guest_email_id)
+    #     # Get or Initalize a Billing Profile with guest user and guest email
+    #     billing_profile, billing_profile_created = BillingProfile.objects.get_or_create(email=guest_email_obj.email)
+    # else: 
+    #     pass
+
+    # IF billing profile already exists
+    if billing_profile is not None:
+        order_obj, order_obj_created = Order.objects.new_or_get(billing_profile, cart_obj)
+
 
     context = {
         "object": order_obj,

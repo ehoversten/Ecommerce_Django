@@ -24,11 +24,21 @@ def login_page(request):
 
     # check if form data is valid
     if form.is_valid():
+        # Initalize variables for binding form data
         username = form.cleaned_data.get("username")
         password = form.cleaned_data.get("password")
         user = authenticate(request, username=username, password=password)
+        # User exists -> (?)
         if user is not None:
             login(request, user)
+
+            # if user is logged in we can void the 'guest_email_id' stored in request.session
+            try:
+                del request.session['guest_email_id']
+            except:
+                pass
+            
+        
             if is_safe_url(redirect_path, request.get_host()):
                 return redirect(redirect_path)
             else:

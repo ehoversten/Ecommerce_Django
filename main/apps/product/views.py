@@ -1,8 +1,8 @@
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib import messages
-from django.views.generic import ListView, DetailView
 
+from django.views.generic import ListView, DetailView
 
 from .models import Product
 from apps.carts.models import Cart 
@@ -33,9 +33,15 @@ class ProductDetailSlugView(DetailView):
     def get_object(self, *args, **kwargs):
         request = self.request
         slug = self.kwargs.get('slug')
-        instance = get_object_or_404(Product, slug=slug)
-        if instance is None:
-            raise Http404("Product not listed here!")
+        try:
+            instance = Product.objects.get(slug=slug, active=True)
+        except Product.DoesNotExist:
+            raise Http404("Not found..")
+        except Product.MultipleObjectsReturned:
+            qs = Product.objects.filter(slug=slug, active=True)
+            instance = qs.first()
+        except:
+            raise Http404("Uhhmmm ")
         return instance
 
 
@@ -80,12 +86,11 @@ def editProduct(request):
 
 
 def productDetail(request, product_id):
-    print('Hello?')
     product = Product.objects.get(id=product_id)
-    object = {
+    context = {
         'product': product,
     }
-    return render(request, Pro + '/productDetail.html', object)
+    return render(request, Pro + '/productDetail.html', context)
 
 
 
