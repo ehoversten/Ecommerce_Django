@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'apps.orders',
     'apps.accounts',
     'apps.billing',
+    "apps.addresses",
 
     # Not created yet.
     # 'apps.review',

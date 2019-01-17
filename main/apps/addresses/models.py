@@ -8,7 +8,7 @@ ADDRESS_TYPES = (
 )
 
 # Create your models here.
-class Address(Model.model):
+class Address(models.Model):
     billing_profile = models.ForeignKey(BillingProfile)
     address_type    = models.CharField(max_length=120, choices=ADDRESS_TYPES)
     address_1       = models.CharField(max_length=120)
