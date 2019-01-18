@@ -2,6 +2,7 @@ from django.db import models
 
 from apps.billing.models import BillingProfile
 
+# declare tuple for selecting billing or shipping address
 ADDRESS_TYPES = (
     ('billing', 'Billing'),
     ('shipping', 'Shipping'),
@@ -15,11 +16,8 @@ class Address(models.Model):
     address_2       = models.CharField(max_length=120, null=True, blank=True)
     city            = models.CharField(max_length=120)
     state           = models.CharField(max_length=120)
-    country         = models.CharField(max_length=120, default="United States")
+    country         = models.CharField(max_length=120, default='United States')
     postal_code     = models.CharField(max_length=120)
-
-    # def __repr__(self):
-    #     return str(self.billing_profile)
 
     def __str__(self):
         return str(self.billing_profile)

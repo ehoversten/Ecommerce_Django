@@ -5,32 +5,32 @@
 {{ object.order_id }} -- {{ object.cart }}
 
 {% if not billing_profile %}
-<div class="container">
-    <div class="row text-center">
-        <div class="col-12 col-md-6">
-            <p class="lead">Login</p>
-            {% include 'accounts/snippets/form.html' with form=login_form next_url=request.build_absolute_uri %}
-        </div>
-        <div class="col-12 col-md-6">
-            <h3>Continue as Guest</h3>
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-12 col-md-6">
+                <p class="lead">Login</p>
+                {% include 'accounts/snippets/form.html' with form=login_form next_url=request.build_absolute_uri %}
+            </div>
+            <div class="col-12 col-md-6">
+                <h3>Continue as Guest</h3>
 
-            {% url "guest_register" as guest_register_url %}
-            {% include 'accounts/snippets/form.html' with form=guest_form next_url=request.build_absolute_uri action_url=guest_register_url%}
+                {% url "guest_register" as guest_register_url %}
+
+                {% include 'accounts/snippets/form.html' with form=guest_form next_url=request.build_absolute_uri action_url=guest_register_url%}
+            </div>
         </div>
     </div>
-</div>
 {% else %}
 
     {% if not object.shipping_address %}
-    <div class='row'>
-        <div class='col-md-6 mx-auto col-10'>
-            <p class='lead'>Shipping Address</p>
-            <hr />
+        <div class='row'>
+            <div class='col-md-6 mx-auto col-10'>
+                <p class='lead'>Shipping Address</p>
+                <hr/>
             {% url "guest_register" as guest_register_url %}
-            {% include 'addresses/form.html' with form=address_form next_url=request.build_absolute_uri
-            action_url=guest_register_url %}
+            {% include 'addresses/form.html' with form=address_form next_url=request.build_absolute_uri action_url=guest_register_url %}
+            </div>
         </div>
-    </div>
     {% else %}
 
         <h1 class='block'>Checkout</h1>
