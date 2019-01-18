@@ -23,7 +23,6 @@ def cart_home(request):
     }
     return render(request, "carts/home.html", context)
 
-
 def cart_update(request):
     # Grab the Product ID
     product_id = request.POST.get('product_id')
@@ -91,4 +90,5 @@ def checkout_home(request):
         "address_form" : address_form,
         "billing_address_form" : billing_address_form
     }
-    return render(request, "carts/checkout.html", context)
+
+    return render(request, 'carts/checkout.html', context)

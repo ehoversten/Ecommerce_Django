@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <div class="container">
     <div class="row">
         <h1>Cart</h1>
@@ -19,7 +20,7 @@
                 {% for product in cart.products.all %}
                 <tr>
                     <th>{{ product.id }}</th>
-                    <td><a href='{% url "product:detail" slug=product.slug %}''>{{ product.name }}</a>
+                    <td><a href='{% url "product:detail" slug=product.slug %}'>{{ product.name }}</a>
                         {% include 'product/snippets/update-cart.html' with product=product cart=cart in_cart=True %}
                     </td>
                     <td>{{ product.price }}</td>
