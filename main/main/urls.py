@@ -5,6 +5,7 @@ from django.conf.urls.static import static
 from django.views.generic import TemplateView
 from django.contrib.auth.views import LogoutView
 from apps.accounts.views import login_page, register_page, logout_view, guest_register_view
+from apps.addresses.views import checkout_address_create_view
 from .views import home_page, about_page, contact_page
 
 from django.conf import settings
@@ -15,19 +16,11 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^product/', include('apps.product.urls', namespace= 'product')),
     url(r'^cart/', include('apps.carts.urls', namespace='cart')),
-
- 
-    # url(r'^customer/', include('apps.customer.urls')),
-    # url(r'^order/', include('apps.order.urls')),
- 
-    # new login and register logout url nav bar
     url(r'^register/$', register_page, name='register'),
     url(r'^register/guest/$', guest_register_view, name='guest_register'),
+    url(r'^checkout/address/create/$', checkout_address_create_view, name='checkout_address_create'),
     url(r'^login/$', login_page, name='login'),
-    # url(r'^logout/$', logout_view, name='logout'),
     url(r'^logout/$', LogoutView.as_view(), name='logout'),
-
-    # contact navbar
     url(r'^contact$', contact_page, name='contact'),
 
     # Not implemented yet, but routes are set - Jose 8/13

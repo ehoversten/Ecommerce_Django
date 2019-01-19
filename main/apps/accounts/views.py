@@ -10,7 +10,6 @@ from .models import GuestEmail
 User = settings.AUTH_USER_MODEL
 # Create your views here.
 
-
 def login_page(request):
     form = LoginForm(request.POST or None)
     context = {
