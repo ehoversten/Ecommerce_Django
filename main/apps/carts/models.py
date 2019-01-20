@@ -1,10 +1,11 @@
+from decimal import Decimal
 from django.conf import settings
 from django.db import models
 from django.db.models.signals import pre_save, post_save, m2m_changed
 
 from apps.product.models import Product
 
-# BUILT IN DJANGO USER MODEL
+# USE BUILT IN DJANGO USER MODEL
 User = settings.AUTH_USER_MODEL
 
 class CartManager(models.Manager):
@@ -26,14 +27,14 @@ class CartManager(models.Manager):
                 cart_obj.save()
         else:
             # Create a new cart with logged in user association
-            cart_obj = Cart.objects.new_cart(user=request.user)
+            cart_obj = Cart.objects.new(user=request.user)
             # Initalize obj variable
             new_obj = True
             # Load cart_id in session context
             request.session['cart_id'] = cart_obj.id
         return cart_obj, new_obj
 
-    def new_cart(self, user=None):
+    def new(self, user=None):
         # initalize obj variable -> User object
         user_obj = None
         # User exists -> (?)
@@ -49,8 +50,8 @@ class CartManager(models.Manager):
 class Cart(models.Model):
     user        = models.ForeignKey(User, null=True, blank=True)
     products    = models.ManyToManyField(Product, blank=True)
-    subtotal    = models.DecimalField(default=0.00, max_digits=5, decimal_places=2)
-    total       = models.DecimalField(default=0.00, max_digits=5, decimal_places=2)
+    subtotal    = models.DecimalField(default=0.00, max_digits=10, decimal_places=2)
+    total       = models.DecimalField(default=0.00, max_digits=10, decimal_places=2)
 
     created_at  = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -68,7 +69,6 @@ class Cart(models.Model):
 # CALLED WHENEVER WE HIT SAVE
 def m2m_changed_cart_reciever(sender, instance, action, *args, **kwargs):
     if action == 'post_add' or action == 'post_remove' or action == 'post_clear':
-        # print(action)
         # QUERYSET
         products = instance.products.all()
         # Initalize calculation variable -> 'total'
@@ -91,7 +91,7 @@ def pre_save_cart_reciever(sender, instance, *args, **kwargs):
     # Subtotal exists -> (?) 
     if instance.subtotal > 0:
         # Calculate Sales Tax
-        instance.total = float(instance.subtotal) * float(1.08)  # -> add 8% Tax
+        instance.total = Decimal(instance.subtotal) * Decimal(1.08)  # -> add 8% Tax
     else:
         # Assign Zero Dollars -> 'total'
         instance.total = 0.00

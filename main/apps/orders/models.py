@@ -24,7 +24,7 @@ class OrderManager(models.Manager):
             billing_profile=billing_profile,
             cart=cart_obj,
             active=True,
-            status='created'
+            #status='created'
             )
 
         print("QS -> ", qs)
@@ -43,7 +43,7 @@ class OrderManager(models.Manager):
         return obj, created
 
 class Order(models.Model):
-    # pk / id -> unique, random?
+    # pk / id -> unique, random
     order_id        = models.CharField(max_length=120, blank=True)
     billing_profile = models.ForeignKey(BillingProfile, null=True, blank=True)
     # shipping_address
@@ -54,12 +54,13 @@ class Order(models.Model):
     total          = models.DecimalField(default=0.00, max_digits=7, decimal_places=2)
     active         = models.BooleanField(default=True)
 
-    objects = OrderManager()
-
     def __str__(self):
         return self.order_id
 
-    # instance method
+    # attach Manager to Order
+    objects = OrderManager()
+
+    # update total instance method
     def update_total(self):
         # object variables
         cart_total = self.cart.total
@@ -81,6 +82,7 @@ def pre_save_create_order_id(sender, instance, *args, **kwargs):
     # Define Queryset --> Find any existing carts
     qs = Order.objects.filter(cart=instance.cart).exclude(billing_profile=instance.billing_profile)
     if qs.exists():
+        print("Found previous cart ... ")
         qs.update(active=False)
 
 # Connect Signal
@@ -101,9 +103,9 @@ def post_save_cart_total(sender, instance, created, *args, **kwargs):
 post_save.connect(post_save_cart_total, sender=Cart)
 
 def post_save_order(sender, instance, created, *args, **kwargs):
-    print("running")
+    print("Saving Order ...")
     if created:
-        print("Updating ... first")
+        print("Updating ... Order Updated")
         instance.update_total()
 
 # Connect Signal

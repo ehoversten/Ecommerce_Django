@@ -3,12 +3,9 @@ import string
 
 from django.utils.text import slugify
 
-
+''' This is for generating a new random string to provide to the ORDER ID GENERATOR '''
 def random_string_generator(size=10, chars=string.ascii_lowercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
-
-# print(random_string_generator())
-# print(random_string_generator(size=50))
 
 def unique_order_id_generator(instance):
     ''' This is for generating a new ORDER_ID field '''
@@ -20,7 +17,6 @@ def unique_order_id_generator(instance):
     if qs_exists:
         return unique_slug_generator(instance)  
     return new_order_id
-
 
 def unique_slug_generator(instance, new_slug=None):
     """
