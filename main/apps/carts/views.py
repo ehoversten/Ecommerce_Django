@@ -9,12 +9,6 @@ from apps.product.models import Product
 from apps.accounts.models import GuestEmail
 from apps.billing.models import BillingProfile
 
-#  CREATE CART METHOD
-# def cart_create(user=None):
-#     cart_obj = Cart.objects.create(user=None)
-#     print("New Cart Created")
-#     return cart_obj
-
 # Create your views here.
 def cart_home(request):
     # grab or the cart object
@@ -53,10 +47,6 @@ def checkout_home(request):
     if cart_created or cart_obj.products.count() == 0:
         return redirect('cart:home')
 
-    # grab the user
-    # user = request.user
-    # Give the Billing Profile a default -> None
-    # billing_profile = None
     # Initalize Forms
     login_form = LoginForm()
     guest_form = GuestForm()
@@ -66,23 +56,9 @@ def checkout_home(request):
     # Get or Initalize a Billing Profile with current logged in or guest user
     billing_profile, billing_profile_created = BillingProfile.objects.new_or_get(request)
 
-    # Load into --> session 
-    # guest_email_id = request.session.get('guest_email_id')
-    # if user.is_authenticated():
-    #     # Get or Initalize a Billing Profile with current user and email
-    #     billing_profile, billing_profile_created = BillingProfile.objects.get_or_create(user=user, email=user.email)
-    # elif guest_email_id is not None:
-    #     # Grab the guest ID
-    #     guest_email_obj = GuestEmail.objects.get(id=guest_email_id)
-    #     # Get or Initalize a Billing Profile with guest user and guest email
-    #     billing_profile, billing_profile_created = BillingProfile.objects.get_or_create(email=guest_email_obj.email)
-    # else: 
-    #     pass
-
     # IF billing profile already exists
     if billing_profile is not None:
         order_obj, order_obj_created = Order.objects.new_or_get(billing_profile, cart_obj)
-
 
     context = {
         "object": order_obj,
