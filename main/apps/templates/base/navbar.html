@@ -26,31 +26,30 @@
         <li class="nav-item {% if request.path == product_url %}active{% endif %}">
           <a class="nav-link" href=" {{ product_url }} ">Products</a>
         </li>
+
+
         {% if request.user.is_authenticated %}
-          <li class="nav-item {% if request.path == logout_url %}active{% endif %}">
-            <form class="logout-link" action="{{ logout_url }}" method="post">
-              {% csrf_token %}
-              <button class="btn btn-outline-primary" type="submit" name="button">Logout</button>
-              <!-- <a class="nav-link" href="{{ logout_url }}">Logout</a> -->
-            </form>
-          </li>
-          <!-- <li class="nav-item {% if request.path == logout_url %}active{% endif %}">
-            <a class="nav-link" href="{{ logout_url }}">Logout</a>
-          </li> -->
+        <!-- <li class="nav-item {% if request.path == logout_url %}active{% endif %}">
+          <form class="logout-link" action="{{ logout_url }}" method="post">
+            {% csrf_token %}
+            <button class="btn btn-outline-primary" type="submit" name="button">Logout</button>
+          </form>
+        </li> -->
+        <li class="nav-item {% if request.path == logout_url %}active{% endif %}">
+          <a class="nav-link" href="{{ logout_url }}">Logout</a>
+        </li>
         {% else %}
-          <li class="nav-item {% if request.path == register_url %}active{% endif %}">
-            <a class="nav-link" href="{{ register_url }}">Register</a>
-          </li>
-          <li class="nav-item {% if request.path == login_url %}active{% endif %}">
-            <a class="nav-link" href="{{ login_url }}">Login</a>
-          </li>
+        <li class="nav-item {% if request.path == register_url %}active{% endif %}">
+          <a class="nav-link" href="{{ register_url }}">Register</a>
+        </li>
+        <li class="nav-item {% if request.path == login_url %}active{% endif %}">
+          <a class="nav-link" href="{{ login_url }}">Login</a>
+        </li>
         {% endif %}
 
         <li class="nav-item {% if request.path == cart_url %}active{% endif %}">
-          <a class="nav-link" href="{{ cart_url }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> ( {{ request.session.cart_items }} )</a>
+          <a class="nav-link" href="{{ cart_url }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>  {{ request.session.cart_items }}</a>
         </li>
-
-
       </ul>
 
     </div>
