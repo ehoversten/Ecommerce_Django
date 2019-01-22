@@ -18,15 +18,13 @@ class BillingProfileManager(models.Manager):
         if user.is_authenticated():
             # 'logged in user checkout; remember payment stuff'
             # Get or Initalize a Billing Profile with current user and email
-            obj, created = self.model.objects.get_or_create(
-                user=user, email=user.email)
+            obj, created = self.model.objects.get_or_create(user=user, email=user.email)
         elif guest_email_id is not None:
             # 'guest user checkout; auto reloads payment stuff'
             # Grab the guest ID
             guest_email_obj = GuestEmail.objects.get(id=guest_email_id)
             # Get or Initalize a Billing Profile with guest user and guest email
-            obj, created = self.model.objects.get_or_create(
-                email=guest_email_obj.email) # self.model.objects -> BillingProfile.objects
+            obj, created = self.model.objects.get_or_create(email=guest_email_obj.email)
         else:
             pass
         return obj, created

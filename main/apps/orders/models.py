@@ -20,24 +20,19 @@ class OrderManager(models.Manager):
     def new_or_get(self, billing_profile, cart_obj):
         created = False
         # QUERY for existing order
-        qs = self.get_queryset().filter(
-            billing_profile=billing_profile,
-            cart=cart_obj,
-            active=True,
-            #status='created'
-            )
+        qs = self.get_queryset().filter(billing_profile=billing_profile, cart=cart_obj, active=True)
 
         print("QS -> ", qs)
         
         # Found Order
         if qs.count() == 1:
+            # created = False
             # variable OBJECT to assign queryset
             obj = qs.first()
             print("FOUND -> Obj -> ", obj)
         else:
             # Create object instance
-            obj = self.model.objects.create(
-                billing_profile=billing_profile, cart=cart_obj)
+            obj = self.model.objects.create(billing_profile=billing_profile, cart=cart_obj)
             created = True
             print("CREATED -> Obj -> ", obj)
         return obj, created

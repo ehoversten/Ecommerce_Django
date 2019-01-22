@@ -25,9 +25,21 @@ def checkout_address_create_view(request):
 
     # check if form data is valid
     if form.is_valid():
-
         # ---- TESTING ---- #
-        print('Address Request: ', request.POST)
+        print('*' * 25)
+        print(request.POST)
+
+        instance = form.save(commit=False)
+
+        billing_profile, billing_profile_created = BillingProfile.objects.new_or_get(request)
+
+        if billing_profile is not None:
+            instance.billing_profile = billing_profile
+            instance.address_type = request.POST.get('address_type', 'shipping')
+            instance.save()
+        else:
+            print("Error Saving Shipping address")
+            return redirect("cart:checkout")
 
         # Redirect back to checkout page
         if is_safe_url(redirect_path, request.get_host()):

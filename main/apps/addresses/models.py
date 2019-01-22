@@ -5,7 +5,7 @@ from apps.billing.models import BillingProfile
 # declare tuple for selecting billing or shipping address
 ADDRESS_TYPES = (
     ('billing', 'Billing'),
-    ('shipping', 'Shipping'),
+    ('shipping', 'Shipping')
 )
 
 # Create your models here.
