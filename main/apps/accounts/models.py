@@ -11,6 +11,3 @@ class GuestEmail(models.Model):
 
     def __str__(self):
         return self.email
-
-    def __repr__(self):
-        return self.email

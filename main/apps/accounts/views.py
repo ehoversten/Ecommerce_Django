@@ -76,10 +76,10 @@ def login_page(request):
     return render(request, "accounts/login.html", context)
 
 
-def logout_view(request):
-    if request.method == 'POST':
-        logout(request)
-        return redirect('/')
+# def logout_view(request):
+#     if request.method == 'POST':
+#         logout(request)
+#         return redirect('/')
 
 
 # Grab the USER model

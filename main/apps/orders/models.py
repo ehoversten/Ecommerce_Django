@@ -83,6 +83,7 @@ def pre_save_create_order_id(sender, instance, *args, **kwargs):
     qs = Order.objects.filter(cart=instance.cart).exclude(billing_profile=instance.billing_profile)
     if qs.exists():
         print("Found previous cart ... ")
+        # update previous carts to be in-active
         qs.update(active=False)
 
 # Connect Signal
