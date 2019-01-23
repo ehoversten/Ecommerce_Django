@@ -8,6 +8,7 @@ from apps.orders.models import Order
 from apps.product.models import Product
 from apps.accounts.models import GuestEmail
 from apps.billing.models import BillingProfile
+from apps.addresses.models import Address
 
 # Create your views here.
 def cart_home(request):
@@ -38,88 +39,84 @@ def cart_update(request):
         
     return redirect("cart:home")
 
-# def checkout_home(request):
-#     # grab the cart object
-#     print(request)
-#     cart_obj, cart_created = Cart.objects.new_or_get(request)
-#     # initalize order_obj to null
-#     order_obj = None
-#     if cart_created or cart_obj.products.count() == 0:
-#         return redirect('cart:home')
-
-#     # Initalize Forms
-#     login_form = LoginForm()
-#     guest_form = GuestForm()
-#     address_form = AddressForm()
-#     # billing_address_form = AddressForm()
-
-#     # Get or Initalize a Billing Profile with current logged in or guest user
-#     billing_profile, billing_profile_created = BillingProfile.objects.new_or_get(request)
-
-#     # IF billing profile already exists
-#     if billing_profile is not None:
-#         order_obj, order_obj_created = Order.objects.new_or_get(billing_profile, cart_obj)
-
-#     context = {
-#         "object": order_obj,
-#         "billing_profile" : billing_profile,
-#         "login_form" : login_form,
-#         "guest_form" : guest_form,
-#         "address_form" : address_form,
-#         "billing_address_form" : billing_address_form
-#     }
-
-#     return render(request, 'carts/checkout.html', context)
-
-
 def checkout_home(request):
-    print("Request -> ", request)
+    # grab the cart object
+    print(request)
     cart_obj, cart_created = Cart.objects.new_or_get(request)
+    # initalize order_obj to null
     order_obj = None
     if cart_created or cart_obj.products.count() == 0:
-        return redirect("cart:home")
-
-    # user = request.user 
-    # billing_profile = None
+        return redirect('cart:home')
 
     # Initalize Forms
     login_form = LoginForm()
     guest_form = GuestForm()
     address_form = AddressForm()
+    # billing_address_form = AddressForm()
 
+    billing_address_id = request.session.get("billing_address_id", None)
+    shipping_address_id = request.session.get("shipping_address_id", None)
+    # Get or Initalize a Billing Profile with current logged in or guest user
     billing_profile, billing_profile_created = BillingProfile.objects.new_or_get(request)
 
-    # Grab the GUEST EMAIL ID from session
-    # guest_email_id = request.session.get('guest_email_id')
-
-    # if user.is_authenticated():
-    #     billing_profile, billing_profile_created = BillingProfile.objects.get_or_create(user=user, email=user.email)
-
-    # elif guest_email_id is not None:
-    #     guest_email_obj = GuestEmail.objects.get(id=guest_email_id)
-    #     billing_profile, billing_guest_profile_created = BillingProfile.objects.get_or_create(email=guest_email_obj.email)
-    # else:
-    #     print("Guest Login Error")
-    #     pass
-
+    # IF billing profile already exists
     if billing_profile is not None:
-        order_obj, order_object_created = Order.objects.new_or_get(billing_profile, cart_obj)
+        order_obj, order_obj_created = Order.objects.new_or_get(billing_profile, cart_obj)
+        # IF shipping_address exists
+        if shipping_address_id:
+            # Associate ORDER OBJECT to shipping address
+            order_obj.shipping_address = Address.objects.get(id=shipping_address_id)
+            # Remove shipping_address_id from session 
+            del request.session["shipping_address_id"]
+        # IF billing_address exists
+        if billing_address_id:
+            # Associate ORDER OBJECT to billing address
+            order_obj.billing_address = Address.objects.get(id=billing_address_id)
+            # Remove billing_address_id from session
+            del request.session["billing_address_id"]
+        # IF either exist -> save()
+        if billing_address_id or shipping_address_id:
+            order_obj.save()
 
-        # order_qs = Order.objects.filter(billing_profile=billing_profile, cart=cart_obj, active=True)
-        # if order_qs.count() == 1:
-        #     order_obj = order_qs.first()
-        # else: 
-        #     # old_order_qs = Order.objects.exclude(billing_profile=billing_profile).filter(cart=cart_obj, active=True)
-        #     # if old_order_qs.exists():
-        #     #     old_order_qs.update(active=False)
-        #     order_obj = Order.objects.create(billing_profile=billing_profile, cart=cart_obj)
 
     context = {
         "object": order_obj,
         "billing_profile" : billing_profile,
         "login_form" : login_form,
-        "guest_form": guest_form,
-        "address_form": address_form,
+        "guest_form" : guest_form,
+        "address_form" : address_form,
+        # "billing_address_form" : billing_address_form
     }
 
     return render(request, 'carts/checkout.html', context)
+
+
+# def checkout_home(request):
+#     print("Request -> ", request)
+#     cart_obj, cart_created = Cart.objects.new_or_get(request)
+#     order_obj = None
+#     if cart_created or cart_obj.products.count() == 0:
+#         return redirect("cart:home")
+
+#     # user = request.user 
+#     # billing_profile = None
+
+#     # Initalize Forms
+#     login_form = LoginForm()
+#     guest_form = GuestForm()
+#     address_form = AddressForm()
+
+#     billing_profile, billing_profile_created = BillingProfile.objects.new_or_get(request)
+
+#     if billing_profile is not None:
+#         order_obj, order_object_created = Order.objects.new_or_get(billing_profile, cart_obj)
+
+#     context = {
+#         "object": order_obj,
+#         "billing_profile" : billing_profile,
+#         "login_form" : login_form,
+#         "guest_form": guest_form,
+#         "address_form": address_form,
+#     }
+
+#     return render(request, 'carts/checkout.html', context)
