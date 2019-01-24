@@ -21,7 +21,7 @@ class OrderManager(models.Manager):
     def new_or_get(self, billing_profile, cart_obj):
         created = False
         # QUERY for existing order
-        qs = self.get_queryset().filter(billing_profile=billing_profile, cart=cart_obj, active=True)
+        qs = self.get_queryset().filter(billing_profile=billing_profile, cart=cart_obj, active=True, status='created')
 
         print("QS -> ", qs)
         
@@ -71,6 +71,23 @@ class Order(models.Model):
         self.save()
         return new_total
 
+    # Method to check if the ORDER is complete 
+    def check_done(self):
+        billing_profile = self.billing_profile
+        billing_address = self.billing_address
+        shipping_address = self.shipping_address
+        total = self.total
+        if billing_profile and billing_address and shipping_address and total > 0:
+            return True
+        return False
+
+    def mark_paid(self):
+        if self.check_done():
+            # Update ORDER status
+            self.status = "paid"
+            self.save()
+        return self.status
+        
 # GENERATE THE ORDER ID
 def pre_save_create_order_id(sender, instance, *args, **kwargs):
     if not instance.order_id:

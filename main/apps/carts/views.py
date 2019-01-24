@@ -12,7 +12,7 @@ from apps.addresses.models import Address
 
 # Create your views here.
 def cart_home(request):
-    # grab or the cart object
+    # grab or create the cart object
     cart_obj, cart_created_obj = Cart.objects.new_or_get(request)
     context = {
         "cart": cart_obj,
@@ -40,7 +40,7 @@ def cart_update(request):
     return redirect("cart:home")
 
 def checkout_home(request):
-    # grab the cart object
+    # Create or Grab the cart object
     print(request)
     cart_obj, cart_created = Cart.objects.new_or_get(request)
     # initalize order_obj to null
@@ -77,6 +77,18 @@ def checkout_home(request):
         # IF either exist -> save()
         if billing_address_id or shipping_address_id:
             order_obj.save()
+
+
+    if request.method == 'POST':
+        # create variable to run method to verify ORDER contains all needed information 
+        is_done = order_obj.check_done()
+        if is_done:
+            order_obj.mark_paid()
+            # reset cart_items in session 
+            request.session['cart_items'] = 0
+            # remove from session 
+            del request.session['cart_id']
+            return redirect("/cart/success")
 
 
     context = {
