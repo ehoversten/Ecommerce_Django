@@ -6,7 +6,7 @@ from django.views.generic import TemplateView
 from django.contrib.auth.views import LogoutView
 # from apps.accounts.views import login_page, register_page, logout_view, guest_register_view
 from apps.accounts.views import login_page, register_page, guest_register_view
-from apps.addresses.views import checkout_address_create_view
+from apps.addresses.views import checkout_address_create_view, checkout_address_reuse_view
 from .views import home_page, about_page, contact_page
 
 from django.conf import settings

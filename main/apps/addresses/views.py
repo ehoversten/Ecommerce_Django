@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.utils.http import is_safe_url
 
 from apps.billing.models import BillingProfile
+from apps.addresses.models import Address
 from .forms import AddressForm
 # Create your views here.
 
@@ -70,8 +71,7 @@ def checkout_address_reuse_view(request):
             address_type = request.POST.get('address_type', 'shipping')
             billing_profile, billing_profile_created = BillingProfile.objects.new_or_get(request)
             if shipping_address is not None:
-                qs = Address.objects.filter(
-                    billing_profile=billing_profile, id=shipping_address)
+                qs = Address.objects.filter(billing_profile=billing_profile, id=shipping_address)
                 if qs.exists():
                     request.session[address_type + "_address_id"] = shipping_address
                 if is_safe_url(redirect_path, request.get_host()):
