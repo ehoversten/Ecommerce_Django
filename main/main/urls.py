@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^register/$', register_page, name='register'),
     url(r'^register/guest/$', guest_register_view, name='guest_register'),
     url(r'^checkout/address/create/$', checkout_address_create_view, name='checkout_address_create'),
+    url(r'^checkout/address/reuse/$', checkout_address_reuse_view, name='checkout_address_reuse'),
 ]
 
 # for media use
