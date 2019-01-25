@@ -52,15 +52,23 @@ def checkout_home(request):
     login_form = LoginForm()
     guest_form = GuestForm()
     address_form = AddressForm()
-    # billing_address_form = AddressForm()
 
+    # Retrieve address from session
     billing_address_id = request.session.get("billing_address_id", None)
     shipping_address_id = request.session.get("shipping_address_id", None)
     # Get or Initalize a Billing Profile with current logged in or guest user
     billing_profile, billing_profile_created = BillingProfile.objects.new_or_get(request)
+    # Default value of ADDRESS QUERY SET
+    address_qs = None
 
     # IF billing profile already exists
     if billing_profile is not None:
+        if request.user.is_authenticated():
+            # Create a query for selecting ADDRESS (shipping or billing) 
+            address_qs = Address.objects.filter(billing_profile=billing_profile)
+            # shipping_address_qs = address_qs.filter(address_type='shipping')
+            # billing_address_qs  = address_qs.filter(address_type='billing')
+
         order_obj, order_obj_created = Order.objects.new_or_get(billing_profile, cart_obj)
         # IF shipping_address exists
         if shipping_address_id:
@@ -97,7 +105,7 @@ def checkout_home(request):
         "login_form" : login_form,
         "guest_form" : guest_form,
         "address_form" : address_form,
-        # "billing_address_form" : billing_address_form
+        "address_qs" : address_qs,
     }
 
     return render(request, 'carts/checkout.html', context)
