@@ -95,7 +95,7 @@ def checkout_home(request):
             request.session['cart_items'] = 0
             # remove from session 
             del request.session['cart_id']
-            return redirect("/cart/success")
+            return redirect("cart:success")
 
     context = {
         "object": order_obj,
@@ -107,3 +107,7 @@ def checkout_home(request):
     }
 
     return render(request, 'carts/checkout.html', context)
+
+
+def checkout_success(request):
+    return render(request, 'carts/checkout_success.html', {})

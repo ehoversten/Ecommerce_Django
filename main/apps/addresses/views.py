@@ -77,3 +77,4 @@ def checkout_address_reuse_view(request):
                 if is_safe_url(redirect_path, request.get_host()):
                     return redirect(redirect_path)
     return redirect("cart:checkout")
+
