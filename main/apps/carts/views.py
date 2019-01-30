@@ -86,7 +86,6 @@ def checkout_home(request):
         if billing_address_id or shipping_address_id:
             order_obj.save()
 
-
     if request.method == 'POST':
         # create variable to run method to verify ORDER contains all needed information 
         is_done = order_obj.check_done()
@@ -98,7 +97,6 @@ def checkout_home(request):
             del request.session['cart_id']
             return redirect("/cart/success")
 
-
     context = {
         "object": order_obj,
         "billing_profile" : billing_profile,
@@ -109,34 +107,3 @@ def checkout_home(request):
     }
 
     return render(request, 'carts/checkout.html', context)
-
-
-# def checkout_home(request):
-#     print("Request -> ", request)
-#     cart_obj, cart_created = Cart.objects.new_or_get(request)
-#     order_obj = None
-#     if cart_created or cart_obj.products.count() == 0:
-#         return redirect("cart:home")
-
-#     # user = request.user 
-#     # billing_profile = None
-
-#     # Initalize Forms
-#     login_form = LoginForm()
-#     guest_form = GuestForm()
-#     address_form = AddressForm()
-
-#     billing_profile, billing_profile_created = BillingProfile.objects.new_or_get(request)
-
-#     if billing_profile is not None:
-#         order_obj, order_object_created = Order.objects.new_or_get(billing_profile, cart_obj)
-
-#     context = {
-#         "object": order_obj,
-#         "billing_profile" : billing_profile,
-#         "login_form" : login_form,
-#         "guest_form": guest_form,
-#         "address_form": address_form,
-#     }
-
-#     return render(request, 'carts/checkout.html', context)
