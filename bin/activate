@@ -40,7 +40,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/paulinosantos/Desktop/Ecommerce_Django/djangoPy3Env"
+VIRTUAL_ENV="/Users/Enotion/development/CodingDojo/EcommerceProj"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
